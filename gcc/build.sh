@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t judgoo/gcc:v1 .
+podman build -t judgoo/gcc:v1 .
