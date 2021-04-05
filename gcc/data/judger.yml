@@ -1,0 +1,10 @@
+language: c
+callback:
+  type: http
+  url: http://www.nghttp2.org/httpbin/post
+env:
+  PATH: /bin/sh:${PATH}
+build:
+  - gcc main.c -o main
+run:
+  - ./main
