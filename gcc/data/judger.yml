@@ -1,3 +1,4 @@
+id: 702f251
 language: c
 callback:
   type: http
@@ -6,5 +7,12 @@ env:
   PATH: /bin/sh:${PATH}
 build:
   - gcc main.c -o main
-run:
-  - ./main
+run: ./main
+testdata:
+  - "1.in::1.out"
+  - "2.in::2.out"
+runner_args:
+  memory_limit: 2048
+  cpu_time_limit: 2000
+  real_time_limit: 5000
+  memory_check_only: true

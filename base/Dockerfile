@@ -11,7 +11,7 @@ FROM golang:alpine3.13
 WORKDIR /build
 RUN set -ex && apk add --update --no-cache git
 RUN git clone https://github.com/Judgoo/Judger .
-RUN go build .
+RUN go build -ldflags "-s -w" .
 
 FROM alpine:3.13
 
