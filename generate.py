@@ -1,1 +1,1 @@
-import helper
+from generator import *

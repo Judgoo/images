@@ -1,16 +1,20 @@
 import sys
 import logging
-import helper.docker
+from . import docker
 from .constants import VERSION
 
 logging.getLogger("").setLevel(logging.INFO)
 logging.root.addHandler(logging.StreamHandler(sys.stdout))
 
 
-class BaseDockerFile(helper.docker.DockerFile):
-    def __init__(self, name, base_img=None):
+class BaseDockerFile(docker.DockerFile):
+    def __init__(self, name: str, base_img=None):
         if base_img is None:
             base_img = "judgoo/base:" + VERSION
+        if not name.startswith("judgoo/"):
+            name = f"judgoo/{name}"
+        if ":" not in name:
+            name = f"{name}:{VERSION}"
         super().__init__(base_img, name)
 
     def generate_files(self):
