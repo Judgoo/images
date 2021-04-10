@@ -1,0 +1,17 @@
+id: 702f251
+language: c
+callback:
+    type: http
+    url: http://www.nghttp2.org/httpbin/post
+env:
+    PATH: /bin/sh:${PATH}
+build: []
+run: python main.py
+testdata:
+    - "../1.in::../1.out"
+    - "../2.in::../2.out"
+runner_args:
+    memory_limit: 2048
+    cpu_time_limit: 2000
+    real_time_limit: 5000
+    memory_check_only: true

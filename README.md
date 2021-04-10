@@ -6,13 +6,11 @@
 使用 podman 打包容器。
 
 ## 例子
-### gcc
 
-gcc 的容器提供了一个判题例子：
+提供了一个使用 gcc 容器的例子：
 
 ```sh
-cd gcc
-podman run --runtime=crun -v $(pwd)/data:/workspace judgoo/gcc:v1
+podman run --runtime=crun -v $(pwd)/testdata:/workspace judgoo/gcc:v1
 # interactive
-podman run --runtime=crun -v $(pwd)/data:/workspace -it --entrypoint /bin/ash  judgoo/gcc:v1
+podman run --runtime=crun -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash  judgoo/gcc:v1
 ```
