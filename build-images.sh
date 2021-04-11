@@ -1,6 +1,6 @@
-podman build --tag judgoo/csharp:v1 --file=Dockerfile.csharp ./images/
-podman build --tag judgoo/python3.9.4:v1 --file=Dockerfile.python3.9.4 ./images/
-podman build --tag judgoo/python3.8-with-packages:v1 --file=Dockerfile.python3.8-with-packages ./images/
-podman build --tag judgoo/gcc:v1 --file=Dockerfile.gcc ./images/
-podman build --tag judgoo/assembly:v1 --file=Dockerfile.assembly ./images/
-podman build --tag judgoo/bash:v1 --file=Dockerfile.bash ./images/
+podman build --tag judgoo/csharp:v1 --file=Dockerfile.csharp "./images/"
+podman build --tag judgoo/python3.9.4:v1 --file=Dockerfile.python3.9.4 "./images/"
+podman build --tag judgoo/python3.8-with-packages:v1 --file=Dockerfile.python3.8-with-packages "./images/"
+podman build --tag judgoo/gcc:v1 --file=Dockerfile.gcc "./images/"
+podman build --tag judgoo/assembly:v1 --file=Dockerfile.assembly "./images/"
+podman build --tag judgoo/bash:v1 --file=Dockerfile.bash "./images/"

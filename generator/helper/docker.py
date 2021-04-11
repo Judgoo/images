@@ -202,18 +202,19 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
             result_files.append(file_path)
         return result_files
 
-    def get_build_command(self):
-        files = self.generate_files(dry_run=True)
+    def get_build_command(self, files=None, args=""):
+        if files is None:
+            files = self.generate_files(dry_run=True)
         dirname, filename = os.path.split(files[0])
 
-        cmd = f"{self._BUILD_TOOL} build  --tag {self.get_img_name()}  --file={filename} {dirname}/"
+        cmd = f"{self._BUILD_TOOL} build  --tag {self.get_img_name()}  --file={filename} \"{dirname}/\" {args}"
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
         return cmd
 
     def build_img(self, remove_out_files=True):
         log.info("Build new docker img {}".format(self.get_img_name()))
         files = self.generate_files(dry_run=True)
-        cmd = self.get_build_command()
+        cmd = self.get_build_command(files)
         log.info('Execute "{}"'.format(cmd))
         p = subprocess.Popen(
             [
