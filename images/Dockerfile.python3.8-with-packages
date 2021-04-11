@@ -1,0 +1,2 @@
+FROM judgoo/base:v1
+RUN apk add --no-cache python3 py3-pandas py3-numpy

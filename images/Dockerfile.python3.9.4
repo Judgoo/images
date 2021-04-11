@@ -1,6 +1,5 @@
 FROM judgoo/base:v1 as base_builder
 FROM python:3.9.4-alpine3.13
-RUN pip3 install numpy pandas
 COPY --from=base_builder /tool/ /tool/
 ENV PATH="/tool:${PATH}"
 WORKDIR /workspace

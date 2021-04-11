@@ -9,4 +9,4 @@ apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/t
     apk del .build-dependencies
 """.strip()
 
-d.generate_files()
+ALL_IMAGES = [d]

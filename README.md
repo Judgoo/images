@@ -1,5 +1,9 @@
 # images
 
+## 生成容器 Dockerfile
+
+项目根目录下的 `generate.py` 负责生成 `images/Dockerfile.*` 和 `build-images.sh` 文件。
+
 ## 开始使用
 ### podman
 
@@ -18,7 +22,7 @@ podman run --runtime=crun -v $(pwd)/testdata:/workspace -it --entrypoint /bin/as
 使用 python 容器的例子：
 
 ```sh
-podman run --runtime=crun -v $(pwd)/testdata:/workspace judgoo/python3.9:v1 -d ./python
+podman run --runtime=crun -v $(pwd)/testdata:/workspace judgoo/python3.8-with-packages:v1 -d ./python
 # interactive
-podman run --runtime=crun -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash  judgoo/python3.9:v1
+podman run --runtime=crun -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash  judgoo/python3.8-with-packages:v1
 ```

@@ -10,6 +10,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+"""
+code is original from <https://github.com/jen-soft/pydocker>
+"""
 
 import os
 import sys
@@ -21,8 +24,6 @@ import logging
 from typing import Any
 
 log = logging.getLogger(__name__)
-
-CONTAINER = "podman"
 
 
 class DockerFile(object):
@@ -49,8 +50,9 @@ class DockerFile(object):
         r"(?P<name>[0-9A-Za-z\-\_\.]+):"
         r"(?P<version>[0-9A-Za-z\-\_\.]+)"
     )
+    _BUILD_TOOL: str
 
-    def __init__(self, base_img, name):
+    def __init__(self, base_img, name, **kwargs):
         self._instructions = []
         self._instructions.append(
             {
@@ -68,6 +70,7 @@ class DockerFile(object):
         self._namespace = _r.group("namespace")
         self._name = _r.group("name")
         self._version = _r.group("version")
+        self._BUILD_TOOL = kwargs.pop("build_tool", "docker")
 
     def get_img_name(self):
         return "{}/{}:{}".format(self._namespace, self._name, self._version)
@@ -84,6 +87,9 @@ class DockerFile(object):
                 "value": value,
             }
         )
+
+    def __repr__(self) -> str:
+        return f"<Dockerfile {self.get_img_name()}>"
 
     def LABEL_(self, *args, **kwargs):
         assert not args
@@ -142,19 +148,17 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
         if not keep_file:
             self.RUN = "rm {}".format(dst_path)
 
-    def generate_files(self, dockefile_name=None, path="./", remove_old_files=True):
-        if dockefile_name is None:
-            dockefile_name = "Dockerfile.{}".format(self._name)
-        log.info(
-            "Generate dockerfile and additional files: {}" "".format(dockefile_name)
-        )
+    def _get_dockerfile(self, dockerfile_name=None):
+        if dockerfile_name is None:
+            dockerfile_name = "Dockerfile.{}".format(self._name)
+
         result = ""
         files = []
         for instruction in self._instructions:
             if instruction["type"] == "file":
                 dst_path = instruction["path"]
                 local_name = "{}.{}@{}".format(
-                    dockefile_name, len(files), os.path.basename(dst_path)
+                    dockerfile_name, len(files), os.path.basename(dst_path)
                 )
                 files.append([local_name, instruction["content"]])
                 result += "\nCOPY {} {}".format(local_name, dst_path)
@@ -164,14 +168,26 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
                 raise ValueError("invalid instruction type {}".format(instruction))
 
         files = [
-            [dockefile_name, result],
+            [dockerfile_name, result],
         ] + files
-        return self._create_files(path, files, remove_old_files)
+        return files
+
+    def generate_files(
+        self, dockerfile_name=None, path="./", remove_old_files=True, dry_run=False
+    ):
+        files = self._get_dockerfile(dockerfile_name)
+
+        return self._create_files(path, files, remove_old_files, dry_run)
 
     @staticmethod
-    def _create_files(path, files, remove_old_files):
+    def _create_files(path, files, remove_old_files, dry_run=False):
         dockerfile_name = files[0][0]
-        if remove_old_files:
+        if not dry_run:
+            log.info(
+                "Generate dockerfile and additional files: {}"
+                "".format(dockerfile_name)
+            )
+        if not dry_run and remove_old_files:
             for name in os.listdir(path):
                 if re.findall(r"^{}.[0-9]+@".format(dockerfile_name), name):
                     os.remove(name)
@@ -179,19 +195,25 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
         result_files = []
         for name, content in files:
             file_path = os.path.join(path, name)
-            with open(file_path, "w+") as file:
-                file.write(content.strip("\n"))
-                file.flush()
+            if not dry_run:
+                with open(file_path, "w+") as file:
+                    file.write(content.strip("\n"))
+                    file.flush()
             result_files.append(file_path)
         return result_files
 
-    def build_img(self, remove_out_files=True):
-        log.info("Build new docker img {}".format(self.get_img_name()))
-        files = self.generate_files()
+    def get_build_command(self):
+        files = self.generate_files(dry_run=True)
         dirname, filename = os.path.split(files[0])
 
-        cmd = f"{CONTAINER} build  --tag {self.get_img_name()}  --file={filename} {dirname}/ "
+        cmd = f"{self._BUILD_TOOL} build  --tag {self.get_img_name()}  --file={filename} {dirname}/"
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
+        return cmd
+
+    def build_img(self, remove_out_files=True):
+        log.info("Build new docker img {}".format(self.get_img_name()))
+        files = self.generate_files(dry_run=True)
+        cmd = self.get_build_command()
         log.info('Execute "{}"'.format(cmd))
         p = subprocess.Popen(
             [

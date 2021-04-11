@@ -15,10 +15,12 @@ class BaseDockerFile(docker.DockerFile):
             name = f"judgoo/{name}"
         if ":" not in name:
             name = f"{name}:{VERSION}"
-        super().__init__(base_img, name)
+        kwargs = {"build_tool": "podman"}
+        super().__init__(base_img, name, **kwargs)
 
-    def generate_files(self):
-        super().generate_files(path="./images")
+    def generate_files(self, **kwargs):
+        kwargs.pop("path", None)
+        return super().generate_files(path="./images", **kwargs)
 
     def add_packages(self, *packages):
         self.RUN = f"apk add --no-cache {' '.join(packages)}"
