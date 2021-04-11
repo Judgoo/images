@@ -1,5 +1,5 @@
 id: 702f251
-language: c
+language: python
 callback:
     type: http
     url: http://www.nghttp2.org/httpbin/post
@@ -8,10 +8,9 @@ env:
 build: []
 run: python3 main.py
 testdata:
-    - "../1.in::../1.out"
-    - "../2.in::../2.out"
+    - "../helloworld.in::../helloworld.out"
 runner_args:
-    memory_limit: 2048
+    memory_limit: 204800
     cpu_time_limit: 2000
     real_time_limit: 5000
     memory_check_only: true

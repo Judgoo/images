@@ -1,7 +1,9 @@
 *.log
 *.tmp
+testdata/asm/a.o
+testdata/asm/a.out
+testdata/csharp/a.exe
 main
-
 .vscode
 
 # Byte-compiled / optimized / DLL files
