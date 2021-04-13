@@ -1,0 +1,6 @@
+FROM judgoo/base:v1 as base_builder
+FROM adoptopenjdk/openjdk11:jdk-11.0.10_9-alpine
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]

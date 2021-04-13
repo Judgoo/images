@@ -1,0 +1,6 @@
+FROM judgoo/base:v1 as base_builder
+FROM golang:1.16.3-alpine3.13
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]

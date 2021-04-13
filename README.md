@@ -16,7 +16,7 @@
 ```sh
 podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace judgoo/gcc:v1 -d ./c
 # interactive
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash  judgoo/gcc:v1
+podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/gcc:v1
 ```
 
 使用 python 容器的例子：
@@ -24,5 +24,5 @@ podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /b
 ```sh
 podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace judgoo/python3.8-with-packages:v1 -d ./python
 # interactive
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash  judgoo/python3.8-with-packages:v1
+podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/python3.8-with-packages:v1
 ```

@@ -3,6 +3,7 @@
 testdata/asm/a.o
 testdata/asm/a.out
 testdata/csharp/a.exe
+testdata/java/Main.class
 main
 .vscode
 
