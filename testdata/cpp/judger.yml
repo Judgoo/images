@@ -1,4 +1,6 @@
-run: "bash main.bash"
+build:
+  - g++ main.cpp -o main
+run: ./main
 testdata:
   - "../helloworld.in::../helloworld.out"
 runner_args:
