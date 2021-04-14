@@ -14,9 +14,9 @@
 使用 gcc 容器的例子：
 
 ```sh
-podman run --rm -v $(pwd)/testdata:/workspace judgoo/gcc:v0.0.1 -d ./c
+podman run --rm -v $(pwd)/testdata:/workspace judgoo/gplusplus:v0.0.1 -d ./c
 # interactive
-podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/gcc:v0.0.1
+podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/gplusplus:v0.0.1
 ```
 
 以此类推，`testdata` 下有各种支持的语言的判题数据。
