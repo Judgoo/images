@@ -8,14 +8,14 @@ logging.root.addHandler(logging.StreamHandler(sys.stdout))
 
 
 class BaseDockerFile(docker.DockerFile):
-    def __init__(self, name: str, base_img=None):
+    def __init__(self, name: str, base_img=None, **kwargs):
         if base_img is None:
             base_img = "judgoo/base:" + VERSION
         if not name.startswith("judgoo/"):
             name = f"judgoo/{name}"
         if ":" not in name:
             name = f"{name}:{VERSION}"
-        kwargs = {"build_tool": "podman"}
+        kwargs = {"build_tool": "podman", **kwargs}
         super().__init__(base_img, name, **kwargs)
 
     def generate_files(self, **kwargs):
@@ -26,7 +26,6 @@ class BaseDockerFile(docker.DockerFile):
         self.RUN = f"apk add --no-cache {' '.join(packages)}"
 
     def add_judger(self):
-        """放到生成的最后"""
         self.FROM = f"judgoo/base:{VERSION} as base_builder"
         x = self._instructions.pop()
         self._instructions.insert(0, x)

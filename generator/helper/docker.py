@@ -71,6 +71,7 @@ class DockerFile(object):
         self._name = _r.group("name")
         self._version = _r.group("version")
         self._BUILD_TOOL = kwargs.pop("build_tool", "docker")
+        self._build_args = kwargs.pop("build_args", "")
 
     def get_img_name(self):
         return "{}/{}:{}".format(self._namespace, self._name, self._version)
@@ -202,12 +203,12 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
             result_files.append(file_path)
         return result_files
 
-    def get_build_command(self, files=None, args=""):
+    def get_build_command(self, files=None, build_args="", trailing_args=""):
         if files is None:
             files = self.generate_files(dry_run=True)
         dirname, filename = os.path.split(files[0])
-
-        cmd = f"{self._BUILD_TOOL} build  --tag {self.get_img_name()}  --file={filename} \"{dirname}/\" {args}"
+        build_args = self._build_args.strip() + " " + build_args.strip()
+        cmd = f'{self._BUILD_TOOL} build {build_args}  --tag {self.get_img_name()}  --file={filename} "{dirname}/" {trailing_args}'
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
         return cmd
 
