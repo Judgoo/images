@@ -1,10 +1,12 @@
 *.log
 *.tmp
-testdata/asm/a.o
-testdata/asm/a.out
-testdata/csharp/a.exe
-testdata/java/Main.class
+a.o
+a.out
+a.exe
+Main.class
 main
+testdata/typescript/main.js
+
 .vscode
 
 # Byte-compiled / optimized / DLL files

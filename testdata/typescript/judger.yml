@@ -1,0 +1,10 @@
+build:
+  - esbuild main.ts --outfile=main.js --platform=node --target=node14
+run: node main.js
+testdata:
+  - "../helloworld.in::../helloworld.out"
+runner_args:
+  memory_limit: 204800
+  cpu_time_limit: 2000
+  real_time_limit: 5000
+  memory_check_only: true

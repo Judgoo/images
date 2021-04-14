@@ -1,0 +1,7 @@
+FROM judgoo/base:v1 as base_builder
+FROM node:14-alpine3.13
+RUN YARN_CACHE_FOLDER=/dev/shm/yarn_cache yarn global add esbuild
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]
