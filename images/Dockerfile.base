@@ -3,11 +3,14 @@ FROM golang:alpine3.13 as builder
 RUN set -ex && apk add --update --no-cache git gcc musl-dev make argp-standalone
 
 WORKDIR /build/code-runner
+# prevent cache
+ADD https://api.github.com/repos/KelabDev/code-runner/git/refs/heads/main /tmp/version.json
 RUN git clone https://github.com/KelabDev/code-runner.git .
 RUN make runner
 
 WORKDIR /build/Judger
-RUN git clone https://github.com/Judgoo/Judger .
+ADD https://api.github.com/repos/Judgoo/Judger/git/refs/heads/main /tmp/version.json
+RUN git clone https://github.com/Judgoo/Judger.git .
 RUN go build -ldflags "-s -w" .
 
 FROM alpine:3.13

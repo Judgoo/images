@@ -14,15 +14,19 @@
 使用 gcc 容器的例子：
 
 ```sh
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace judgoo/gcc:v1 -d ./c
+podman run --rm -v $(pwd)/testdata:/workspace judgoo/gcc:v0.0.1 -d ./c
 # interactive
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/gcc:v1
+podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/gcc:v0.0.1
 ```
 
-使用 python 容器的例子：
+以此类推，`testdata` 下有各种支持的语言的判题数据。
+
+## 清除镜像
+
+更新了 base 镜像的话可能需要先清除所有当前版本的其他镜像。
+
+首先需要先删除所有容器。
 
 ```sh
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace judgoo/python3.8-with-packages:v1 -d ./python
-# interactive
-podman run --runtime=crun --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/ash judgoo/python3.8-with-packages:v1
+podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
 ```
