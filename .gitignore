@@ -5,6 +5,7 @@ a.out
 a.exe
 Main.class
 main
+main.o
 testdata/typescript/main.js
 
 .vscode

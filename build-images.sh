@@ -2,6 +2,7 @@ podman build --tag judgoo/openjdk11:v0.0.1 --file=Dockerfile.openjdk11 "./images
 podman build --tag judgoo/csharp:v0.0.1 --file=Dockerfile.csharp "./images/"
 podman build --tag judgoo/golang:v0.0.1 --file=Dockerfile.golang "./images/"
 podman build --tag judgoo/lua:v0.0.1 --file=Dockerfile.lua "./images/"
+podman build --tag judgoo/dlang:v0.0.1 --file=Dockerfile.dlang "./images/"
 podman build --tag judgoo/python3.9:v0.0.1 --file=Dockerfile.python3.9 "./images/"
 podman build --tag judgoo/python3-with-packages:v0.0.1 --file=Dockerfile.python3-with-packages "./images/"
 podman build --tag judgoo/nodejs14:v0.0.1 --file=Dockerfile.nodejs14 "./images/"
