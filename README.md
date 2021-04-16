@@ -30,3 +30,15 @@ podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/
 ```sh
 podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
 ```
+
+清空 `<none>` 容器：
+
+```bash
+podman images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs podman rmi
+```
+
+移除所有 storage 容器：
+
+```bash
+podman ps --all --storage | awk 'NR>1{ print $1 }' | xargs podman container rm --force
+```
