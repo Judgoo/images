@@ -1,6 +1,6 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from .helper import DebianBaseDockerFile
 
-d = AlpineBaseDockerFile("rust1.51", "rust:1.51.0-alpine3.13")
+d = DebianBaseDockerFile("rust1.51", "rust:1.51-slim-buster")
 d.add_judger()
 
 ALL_IMAGES = [d]
