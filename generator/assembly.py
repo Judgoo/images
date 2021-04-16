@@ -1,6 +1,6 @@
 from .helper.base import DockerFile
 
-d = DockerFile("assembly")
+d = DockerFile("nasm")
 d.add_packages("binutils", "nasm")
 
 
