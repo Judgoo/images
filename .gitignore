@@ -3,7 +3,7 @@
 a.o
 a.out
 a.exe
-Main.class
+*.class
 main
 main.o
 testdata/typescript/main.js

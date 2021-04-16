@@ -85,7 +85,7 @@ class DockerFile(object):
             {
                 "type": "instruction",
                 "name": key,
-                "value": value,
+                "value": value.strip(),
             }
         )
 
