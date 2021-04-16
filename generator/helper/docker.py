@@ -54,6 +54,8 @@ class DockerFile(object):
 
     def __init__(self, base_img, name, **kwargs):
         self._instructions = []
+        if isinstance(base_img, DockerFile):
+            base_img = base_img.get_img_name()
         self._instructions.append(
             {
                 "type": "instruction",

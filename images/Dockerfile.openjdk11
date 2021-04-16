@@ -1,5 +1,5 @@
-FROM judgoo/base-alpine:v0.0.1 as base_builder
-FROM adoptopenjdk/openjdk11:jdk-11.0.10_9-alpine
+FROM judgoo/base-debian:v0.0.1 as base_builder
+FROM adoptopenjdk/openjdk11:debianslim-slim
 COPY --from=base_builder /tool/ /tool/
 ENV PATH="/tool:${PATH}"
 WORKDIR /workspace

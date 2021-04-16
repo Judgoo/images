@@ -7,7 +7,7 @@ a.exe
 main
 main.o
 testdata/typescript/main.js
-
+testdata/kotlin/META-INF
 .vscode
 
 # Byte-compiled / optimized / DLL files

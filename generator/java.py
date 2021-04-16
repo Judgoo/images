@@ -1,6 +1,6 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from .helper import DebianBaseDockerFile
 
-d = AlpineBaseDockerFile("openjdk11", "adoptopenjdk/openjdk11:jdk-11.0.10_9-alpine")
+d = DebianBaseDockerFile("openjdk11", "adoptopenjdk/openjdk11:debianslim-slim")
 d.add_judger()
 
 ALL_IMAGES = [d]

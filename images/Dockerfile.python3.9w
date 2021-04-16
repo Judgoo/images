@@ -1,0 +1,3 @@
+FROM judgoo/python3.9:v0.0.1
+ARG PIP_NO_CACHE_DIR=1
+RUN pip install --no-cache numpy pandas

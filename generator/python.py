@@ -1,10 +1,11 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from .helper import DebianBaseDockerFile
 
 
-py39 = AlpineBaseDockerFile("python3.9", base_img="python:3.9-alpine3.13")
+py39 = DebianBaseDockerFile("python3.9", base_img="python:3.9-slim-buster")
 py39.add_judger()
 
-py38_w = AlpineBaseDockerFile("python3-with-packages")
-py38_w.add_packages("python3 py3-pandas py3-numpy")
+py39_w = DebianBaseDockerFile("python3.9w", base_img=py39)
+py39_w.ARG = "PIP_NO_CACHE_DIR=1"
+py39_w.RUN = "pip install --no-cache numpy pandas"
 
-ALL_IMAGES = [py39, py38_w]
+ALL_IMAGES = [py39, py39_w]

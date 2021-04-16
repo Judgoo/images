@@ -13,6 +13,8 @@ all_images: List[BaseDockerFile] = []
 for k, v in _s.items():
     all_images.extend(v.ALL_IMAGES)
 
+all_images.sort(key=lambda k: k.get_img_name())
+
 for f in listdir("./images"):
     if f.endswith(".base"):
         continue
