@@ -1,4 +1,4 @@
-FROM judgoo/base:v0.0.1 as base_builder
+FROM judgoo/base-alpine:v0.0.1 as base_builder
 FROM node:14-alpine3.13
 RUN YARN_CACHE_FOLDER=/dev/shm/yarn_cache yarn global add esbuild
 COPY --from=base_builder /tool/ /tool/

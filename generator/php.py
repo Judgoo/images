@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("php")
+d = AlpineBaseDockerFile("php")
 d.add_packages("php")
 
 ALL_IMAGES = [d]

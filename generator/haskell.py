@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("haskell")
+d = AlpineBaseDockerFile("haskell")
 d.add_packages("ghc")
 
 ALL_IMAGES = [d]

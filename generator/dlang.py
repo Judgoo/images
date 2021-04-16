@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("dlang2")
+d = AlpineBaseDockerFile("dlang2")
 d.add_packages("dmd", "gcc", "musl-dev")
 
 

@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("golang", "golang:1.16.3-alpine3.13")
+d = AlpineBaseDockerFile("golang", "golang:1.16.3-alpine3.13")
 d.add_judger()
 
 ALL_IMAGES = [d]

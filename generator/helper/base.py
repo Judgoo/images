@@ -8,15 +8,18 @@ logging.root.addHandler(logging.StreamHandler(sys.stdout))
 
 
 class BaseDockerFile(docker.DockerFile):
+    OS: str
+
     def __init__(self, name: str, base_img=None, **kwargs):
+        self._default_base_img = f"judgoo/base-{self.OS}:{VERSION}"
         if base_img is None:
-            base_img = "judgoo/base:" + VERSION
+            base_img = self._default_base_img
         if not name.startswith("judgoo/"):
             name = f"judgoo/{name}"
         if ":" not in name:
             name = f"{name}:{VERSION}"
         kwargs = {"build_tool": "podman", **kwargs}
-        super().__init__(base_img, name, **kwargs)
+        super(BaseDockerFile, self).__init__(base_img, name, **kwargs)
 
     def generate_files(self, **kwargs):
         kwargs.pop("path", None)
@@ -26,7 +29,7 @@ class BaseDockerFile(docker.DockerFile):
         self.RUN = f"apk add --no-cache {' '.join(packages)}"
 
     def add_judger(self):
-        self.FROM = f"judgoo/base:{VERSION} as base_builder"
+        self.FROM = f"{self._default_base_img} as base_builder"
         x = self._instructions.pop()
         self._instructions.insert(0, x)
 
@@ -34,6 +37,3 @@ class BaseDockerFile(docker.DockerFile):
         self.ENV = 'PATH="/tool:${PATH}"'
         self.WORKDIR = "/workspace"
         self.ENTRYPOINT = ["Judger"]
-
-
-DockerFile = BaseDockerFile

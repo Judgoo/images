@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("gplusplus")
+d = AlpineBaseDockerFile("gplusplus")
 d.add_packages("g++")
 
 ALL_IMAGES = [d]

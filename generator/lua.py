@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("lua")
+d = AlpineBaseDockerFile("lua")
 d.add_packages("lua")
 
 ALL_IMAGES = [d]

@@ -1,0 +1,21 @@
+FROM golang:1.16-buster as builder
+
+WORKDIR /build/code-runner
+ADD https://api.github.com/repos/KelabDev/code-runner/git/refs/heads/main /tmp/version.json
+RUN git clone https://github.com/KelabDev/code-runner.git .
+RUN make runner
+
+WORKDIR /build/Judger
+ADD https://api.github.com/repos/Judgoo/Judger/git/refs/heads/main /tmp/version.json
+RUN git clone https://github.com/Judgoo/Judger.git .
+RUN go build -ldflags "-s -w" .
+
+FROM debian:buster-slim
+
+COPY --from=builder /build/code-runner/runner /tool/
+COPY --from=builder /build/Judger/Judger /tool/
+
+ENV PATH="/tool:${PATH}"
+
+WORKDIR /workspace
+ENTRYPOINT [ "Judger" ]

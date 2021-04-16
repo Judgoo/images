@@ -1,6 +1,6 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
-d = DockerFile("nasm")
+d = AlpineBaseDockerFile("nasm")
 d.add_packages("binutils", "nasm")
 
 

@@ -1,9 +1,9 @@
-from .helper.base import DockerFile
+from .helper.alpine_base import AlpineBaseDockerFile
 
 BASE_IMAGE = "adoptopenjdk/openjdk8:jdk8u282-b08-alpine-slim"
 COMPILER_URL = "https://github.com/JetBrains/kotlin/releases/download/v1.4.32/kotlin-compiler-1.4.32.zip"
 
-kt = DockerFile("kotlin1.42", BASE_IMAGE)
+kt = AlpineBaseDockerFile("kotlin1.42", BASE_IMAGE)
 kt.add_judger()
 kt.RUN = f"""apk add --no-cache bash && \\
     apk add --no-cache -t build-dependencies wget && \\

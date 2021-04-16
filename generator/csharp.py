@@ -1,12 +1,6 @@
-from .helper.base import DockerFile
+from .helper.debian_base import DebianBaseDockerFile
 
-d = DockerFile("csharp")
-
-d.RUN = """
-apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && \\
-    apk add --no-cache --virtual=.build-dependencies ca-certificates && \\
-    cert-sync /etc/ssl/certs/ca-certificates.crt && \\
-    apk del --no-cache .build-dependencies
-""".strip()
+d = DebianBaseDockerFile("csharp", "mcr.microsoft.com/dotnet/sdk:5.0-buster-slim")
+d.add_judger()
 
 ALL_IMAGES = [d]

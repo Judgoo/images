@@ -1,6 +1,5 @@
-from .helper.base import DockerFile
+from .helper.debian_base import DebianBaseDockerFile
 
-d = DockerFile("bash")
-d.add_packages("bash")
+d = DebianBaseDockerFile("bash")
 
 ALL_IMAGES = [d]
