@@ -1,0 +1,19 @@
+FROM judgoo/base-debian:v0.0.1 as base_builder
+FROM adoptopenjdk/openjdk8:debianslim-slim
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]
+RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    cd "/tmp" && \
+    wget "https://downloads.typesafe.com/scala/2.13.5/scala-2.13.5.tgz" && \
+    tar xzf "scala-2.13.5.tgz" && \
+    mkdir "/usr/share/scala" && \
+    rm "/tmp/scala-2.13.5/bin/"*.bat && \
+    mv "/tmp/scala-2.13.5/bin" "/tmp/scala-2.13.5/lib" "/usr/share/scala" && \
+    ln -s "/usr/share/scala/bin/"* "/usr/bin/" && \
+    apt-get remove -y wget && \
+    apt-get autoremove -y && \
+    apt-get autoclean -y && \
+    rm -rf "/tmp/"*

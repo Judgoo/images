@@ -1,0 +1,10 @@
+build:
+  - scalac main.scala
+run: scala Main
+testdata:
+  - "../helloworld.in::../helloworld.out"
+runner_args:
+  memory_limit: 204800
+  cpu_time_limit: 2000
+  real_time_limit: 5000
+  memory_check_only: true

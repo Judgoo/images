@@ -8,6 +8,10 @@ main
 main.o
 testdata/typescript/main.js
 testdata/kotlin/META-INF
+
+testdata/ocaml/main.cmi
+testdata/ocaml/main.cmo
+
 .vscode
 
 # Byte-compiled / optimized / DLL files
