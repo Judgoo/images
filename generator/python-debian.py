@@ -1,11 +1,11 @@
 from .helper import DebianBaseDockerFile
 
 
+py27 = DebianBaseDockerFile("python2.7", base_img="python:2.7.18-slim-buster")
+py27.RUN = "pip install --no-cache numpy pandas"
+
+
 py39 = DebianBaseDockerFile("python3.9", base_img="python:3.9-slim-buster")
-py39.add_judger()
+py39.RUN = "pip install --no-cache numpy pandas"
 
-py39_w = DebianBaseDockerFile("python3.9w", base_img=py39)
-py39_w.ARG = "PIP_NO_CACHE_DIR=1"
-py39_w.RUN = "pip install --no-cache numpy pandas"
-
-ALL_IMAGES = [py39, py39_w]
+ALL_IMAGES = [py27, py39]

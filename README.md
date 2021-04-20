@@ -37,9 +37,3 @@ docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs docker rmi
 ```bash
 docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs docker rmi
 ```
-
-移除所有 storage 容器：
-
-```bash
-docker ps --all --storage | awk 'NR>1{ print $1 }' | xargs docker container rm --force
-```
