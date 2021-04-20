@@ -205,12 +205,15 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
             result_files.append(file_path)
         return result_files
 
-    def get_build_command(self, files=None, build_args="", trailing_args=""):
+    def get_build_command(
+        self, files=None, build_tool="", build_args="", trailing_args=""
+    ):
         if files is None:
             files = self.generate_files(dry_run=True)
         dirname, filename = os.path.split(files[0])
         build_args = self._build_args.strip() + " " + build_args.strip()
-        cmd = f'{self._BUILD_TOOL} build {build_args}  --tag {self.get_img_name()}  --file={filename} "{dirname}/" {trailing_args}'
+        build_tool = build_tool or self._BUILD_TOOL
+        cmd = f'{build_tool} build {build_args}  --tag {self.get_img_name()}  --file={filename} "{dirname}/" . {trailing_args}'
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
         return cmd
 
