@@ -213,7 +213,9 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
         dirname, filename = os.path.split(files[0])
         build_args = self._build_args.strip() + " " + build_args.strip()
         build_tool = build_tool or self._BUILD_TOOL
-        cmd = f'{build_tool} build {build_args}  --tag {self.get_img_name()}  --file={filename} "{dirname}/" . {trailing_args}'
+        if build_tool == "docker":
+            build_tool = "sudo docker"
+        cmd = f'{build_tool} build {build_args}  --tag {self.get_img_name()}  --file={files[0]} "{dirname}/" {trailing_args}'
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
         return cmd
 

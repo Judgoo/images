@@ -6,18 +6,18 @@
 
 ## 开始使用
 
-### podman
+### docker
 
-使用 podman 打包容器。
+使用 docker 打包容器。
 
 ## 例子
 
 使用 gcc 容器的例子：
 
 ```sh
-podman run --rm -v $(pwd)/testdata:/workspace judgoo/gpp:v0.0.1 -d ./c
+docker run --rm -v $(pwd)/testdata:/workspace judgoo/gpp:v0.0.1 -d ./c
 # interactive
-podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/gpp:v0.0.1
+docker run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/gpp:v0.0.1
 ```
 
 以此类推，`testdata` 下有各种支持的语言的判题数据。
@@ -29,17 +29,17 @@ podman run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/
 首先需要先删除所有容器。
 
 ```sh
-podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
+docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs docker rmi --force
 ```
 
 清空 `<none>` 容器：
 
 ```bash
-podman images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs podman rmi
+docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs docker rmi
 ```
 
 移除所有 storage 容器：
 
 ```bash
-podman ps --all --storage | awk 'NR>1{ print $1 }' | xargs podman container rm --force
+docker ps --all --storage | awk 'NR>1{ print $1 }' | xargs docker container rm --force
 ```

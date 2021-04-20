@@ -18,7 +18,7 @@ class BaseDockerFile(docker.DockerFile):
             name = f"judgoo/{name}"
         if ":" not in name:
             name = f"{name}:{VERSION}"
-        kwargs = {"build_tool": "podman", **kwargs}
+        kwargs = {"build_tool": "docker", **kwargs}
         super(BaseDockerFile, self).__init__(base_img, name, **kwargs)
 
     def generate_files(self, **kwargs):
