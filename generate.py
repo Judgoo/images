@@ -26,15 +26,23 @@ for f in listdir("./images"):
 
 build_sh = f"./build-images-{build_tool}.sh"
 build_all = f"./build-all-{build_tool}.sh"
-f = open(build_sh, "w+")
+push_all = f"./push-all-{build_tool}.sh"
 
-for image in all_images:
-    image.generate_files()
-    f.write(image.get_build_command(build_tool=build_tool))
-    f.write("\n")
-    f.flush()
+with open(build_sh, "w+") as f:
+    for image in all_images:
+        image.generate_files()
+        f.write(image.get_build_command(build_tool=build_tool))
+        f.write("\n")
+        f.flush()
 
-f.close()
+
+with open(push_all, "w+") as f:
+    for image in all_images:
+        image.generate_files()
+        f.write(f"{build_tool} push {image.get_img_name()}")
+        f.write("\n")
+        f.flush()
+
 if build_tool == "docker":
     build_tool = "sudo docker"
 
@@ -50,3 +58,4 @@ with open(build_all, "w+") as f:
 
 os.chmod(build_sh, 0o0777)
 os.chmod(build_all, 0o0777)
+os.chmod(push_all, 0o0777)
