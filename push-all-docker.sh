@@ -5,7 +5,7 @@ docker push judgoo/golang:v0.0.1
 docker push judgoo/gpp:v0.0.1
 docker push judgoo/haskell:v0.0.1
 docker push judgoo/julia1.6:v0.0.1
-docker push judgoo/kotlin1.42:v0.0.1
+docker push judgoo/kotlin1.4.32:v0.0.1
 docker push judgoo/lua:v0.0.1
 docker push judgoo/nasm:v0.0.1
 docker push judgoo/nodejs14:v0.0.1
@@ -17,6 +17,6 @@ docker push judgoo/python2.7:v0.0.1
 docker push judgoo/python3.9:v0.0.1
 docker push judgoo/ruby:v0.0.1
 docker push judgoo/rust1.51:v0.0.1
-docker push judgoo/scala:v0.0.1
-docker push judgoo/swift:v0.0.1
+docker push judgoo/scala2.13.5:v0.0.1
+docker push judgoo/swift5.3.3:v0.0.1
 docker push judgoo/typescript:v0.0.1
