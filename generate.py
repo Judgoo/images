@@ -50,8 +50,8 @@ def gen(build_tool):
     with open(build_all, "w+") as f:
         f.writelines(
             [
-                f"{build_tool} build -t judgoo/base-alpine:v0.0.1 -f ./images/Dockerfile.alpine.base ./images\n",
-                f"{build_tool} build -t judgoo/base-debian:v0.0.1 -f ./images/Dockerfile.debian.base ./images\n",
+                f"{build_tool} build -t judgoo/base-alpine:v0.0.1 -f ./base/Dockerfile.alpine.base ./base\n",
+                f"{build_tool} build -t judgoo/base-debian:v0.0.1 -f ./base/Dockerfile.debian.base ./base\n",
                 "\n",
                 f"sh {build_sh}\n",
             ]
