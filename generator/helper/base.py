@@ -8,12 +8,20 @@ logging.root.addHandler(logging.StreamHandler(sys.stdout))
 
 
 class BaseDockerFile(docker.DockerFile):
+    BASE_IMG: str
     OS: str
+    _is_add_judger: bool
 
     def __init__(self, name: str, base_img=None, **kwargs):
         self._default_base_img = f"judgoo/base-{self.OS}:{VERSION}"
+        self._is_add_judger = False
         if base_img is None:
+            base_img = self.BASE_IMG
+
+        use_judgoo = kwargs.get("use_judgoo")
+        if use_judgoo:
             base_img = self._default_base_img
+
         if not name.startswith("judgoo/"):
             name = f"judgoo/{name}"
         if ":" not in name:
@@ -35,3 +43,4 @@ class BaseDockerFile(docker.DockerFile):
         self.ENV = 'PATH="/tool:${PATH}"'
         self.WORKDIR = "/workspace"
         self.ENTRYPOINT = ["Judger"]
+        self._is_add_judger = True

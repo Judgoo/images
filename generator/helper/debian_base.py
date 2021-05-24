@@ -2,6 +2,7 @@ from .base import BaseDockerFile
 
 
 class DebianBaseDockerFile(BaseDockerFile):
+    BASE_IMG = "debian:buster-slim"
     OS = "debian"
 
     def add_packages(self, *packages):

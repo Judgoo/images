@@ -16,5 +16,6 @@ qjs = AlpineBaseDockerFile("quickjs-2021-03-27")
 qjs.add_builder(qjs_builder, "build")
 
 qjs.COPY = "--from=build /out /usr/local/bin/"
+qjs.add_judger()
 
 ALL_IMAGES = [qjs]

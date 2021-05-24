@@ -1,4 +1,9 @@
-FROM judgoo/base-debian:v0.0.1
+FROM judgoo/base-debian:v0.0.1 as base_builder
+FROM debian:buster-slim
 RUN apt-get update && \
 apt-get install -y --no-install-recommends g++ && \
 rm -rf /var/lib/apt/lists/*
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]

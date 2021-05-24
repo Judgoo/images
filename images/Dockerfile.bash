@@ -1,2 +1,7 @@
-FROM judgoo/base-alpine:v0.0.1
+FROM judgoo/base-alpine:v0.0.1 as base_builder
+FROM alpine:3.13
 RUN apk add --no-cache bash
+COPY --from=base_builder /tool/ /tool/
+ENV PATH="/tool:${PATH}"
+WORKDIR /workspace
+ENTRYPOINT ["Judger"]

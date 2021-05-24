@@ -1,2 +1,2 @@
-FROM judgoo/base-alpine:v0.0.1
+FROM alpine:3.13
 RUN apk add --no-cache binutils nasm

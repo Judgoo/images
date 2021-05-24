@@ -26,6 +26,8 @@ push_all = "./push-all-docker.sh"
 
 with open(push_all, "w+") as f:
     for image in all_images:
+        if not image._is_add_judger:
+            image.add_judger()
         f.write(f"docker push {image.get_img_name()}")
         f.write("\n")
         f.flush()

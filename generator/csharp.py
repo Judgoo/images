@@ -8,5 +8,6 @@ apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/t
     cert-sync /etc/ssl/certs/ca-certificates.crt && \\
     apk del --no-cache .build-dependencies
 """.strip()
+d.add_judger()
 
 ALL_IMAGES = [d]
