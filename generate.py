@@ -22,7 +22,7 @@ all_images.sort(key=lambda k: k.get_img_name())
 for image in all_images:
     image.generate_files()
 
-push_all = f"./push-all-docker.sh"
+push_all = "./push-all-docker.sh"
 
 with open(push_all, "w+") as f:
     for image in all_images:

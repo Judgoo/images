@@ -29,9 +29,7 @@ class BaseDockerFile(docker.DockerFile):
         self.RUN = f"apk add --no-cache {' '.join(packages)}"
 
     def add_judger(self):
-        self.FROM = f"{self._default_base_img} as base_builder"
-        x = self._instructions.pop()
-        self._instructions.insert(0, x)
+        self.add_front_from(f"{self._default_base_img} as base_builder")
 
         self.COPY = "--from=base_builder /tool/ /tool/"
         self.ENV = 'PATH="/tool:${PATH}"'

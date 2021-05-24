@@ -15,6 +15,7 @@ docker push judgoo/perl:v0.0.1
 docker push judgoo/php7:v0.0.1
 docker push judgoo/python2.7:v0.0.1
 docker push judgoo/python3.9:v0.0.1
+docker push judgoo/quickjs-2021-03-27:v0.0.1
 docker push judgoo/ruby:v0.0.1
 docker push judgoo/rust1.51:v0.0.1
 docker push judgoo/scala2.13.5:v0.0.1

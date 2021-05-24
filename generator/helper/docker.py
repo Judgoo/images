@@ -21,9 +21,15 @@ import json
 import subprocess
 
 import logging
-from typing import Any
+from typing import Any, List, TypedDict
 
 log = logging.getLogger(__name__)
+
+
+class Instruction(TypedDict):
+    type: str
+    name: str
+    value: str
 
 
 class DockerFile(object):
@@ -50,6 +56,7 @@ class DockerFile(object):
         r"(?P<name>[0-9A-Za-z\-\_\.]+):"
         r"(?P<version>[0-9A-Za-z\-\_\.]+)"
     )
+    _instructions: List[Instruction]
 
     def __init__(self, base_img, name, **kwargs):
         self._instructions = []
@@ -103,8 +110,8 @@ class DockerFile(object):
         self._instructions.append(
             {
                 "type": "file",
-                "path": dst_path,
-                "content": content,
+                "name": dst_path,
+                "value": content,
             }
         )
         if chmod is not None:
@@ -156,11 +163,11 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
         files = []
         for instruction in self._instructions:
             if instruction["type"] == "file":
-                dst_path = instruction["path"]
+                dst_path = instruction["name"]
                 local_name = "{}.{}@{}".format(
                     dockerfile_name, len(files), os.path.basename(dst_path)
                 )
-                files.append([local_name, instruction["content"]])
+                files.append([local_name, instruction["value"]])
                 result += "\nCOPY {} {}".format(local_name, dst_path)
             elif instruction["type"] == "instruction":
                 result += "\n{name} {value}".format(**instruction)
@@ -229,3 +236,12 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
         if remove_out_files and p.returncode == 0:
             for file in files:
                 os.remove(file)
+
+    def add_front_from(self, from_):
+        self.FROM = from_
+        x = self._instructions.pop()
+        self._instructions.insert(0, x)
+
+    def add_builder(self, Builder: "DockerFile", builder_name):
+        Builder._instructions[0]["value"] += f" as {builder_name}"
+        self._instructions = Builder._instructions + self._instructions

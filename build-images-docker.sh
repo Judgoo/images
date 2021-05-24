@@ -15,6 +15,7 @@ sudo docker build --tag judgoo/perl:v0.0.1 --file=./images/Dockerfile.perl "./im
 sudo docker build --tag judgoo/php7:v0.0.1 --file=./images/Dockerfile.php7 "./images/"
 sudo docker build --tag judgoo/python2.7:v0.0.1 --file=./images/Dockerfile.python2.7 "./images/"
 sudo docker build --tag judgoo/python3.9:v0.0.1 --file=./images/Dockerfile.python3.9 "./images/"
+sudo docker build --tag judgoo/quickjs-2021-03-27:v0.0.1 --file=./images/Dockerfile.quickjs-2021-03-27 "./images/"
 sudo docker build --tag judgoo/ruby:v0.0.1 --file=./images/Dockerfile.ruby "./images/"
 sudo docker build --tag judgoo/rust1.51:v0.0.1 --file=./images/Dockerfile.rust1.51 "./images/"
 sudo docker build --tag judgoo/scala2.13.5:v0.0.1 --file=./images/Dockerfile.scala2.13.5 "./images/"

@@ -1,0 +1,7 @@
+FROM alpine:latest as build
+RUN apk add --no-cache xz make g++
+ENV VERSION=2021-03-27
+ADD https://bellard.org/quickjs/quickjs-${VERSION}.tar.xz /tmp
+RUN cd /tmp   && tar xf quickjs-${VERSION}.tar.xz   && cd quickjs-${VERSION}   && (make || true)   && mkdir /out   && mv qjs qjsc qjscalc /out
+FROM judgoo/base-alpine:v0.0.1
+COPY --from=build /out /usr/local/bin/
