@@ -50,7 +50,6 @@ class DockerFile(object):
         r"(?P<name>[0-9A-Za-z\-\_\.]+):"
         r"(?P<version>[0-9A-Za-z\-\_\.]+)"
     )
-    _BUILD_TOOL: str
 
     def __init__(self, base_img, name, **kwargs):
         self._instructions = []
@@ -72,7 +71,6 @@ class DockerFile(object):
         self._namespace = _r.group("namespace")
         self._name = _r.group("name")
         self._version = _r.group("version")
-        self._BUILD_TOOL = kwargs.pop("build_tool", "docker")
         self._build_args = kwargs.pop("build_args", "")
 
     def get_img_name(self):
@@ -111,7 +109,6 @@ class DockerFile(object):
         )
         if chmod is not None:
             self.RUN = "chmod {} {}".format(chmod, dst_path)
-        #
 
     def COPY_(self, dst_path, content, chmod=None):
         self.add_new_file(dst_path, content, chmod=chmod)
@@ -182,14 +179,10 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
 
         return self._create_files(path, files, remove_old_files, dry_run)
 
-    @staticmethod
-    def _create_files(path, files, remove_old_files, dry_run=False):
+    def _create_files(self, path, files, remove_old_files, dry_run=False):
         dockerfile_name = files[0][0]
         if not dry_run:
-            log.info(
-                "Generate dockerfile and additional files: {}"
-                "".format(dockerfile_name)
-            )
+            log.info(f"Generate dockerfile: {dockerfile_name}")
         if not dry_run and remove_old_files:
             for name in os.listdir(path):
                 if re.findall(r"^{}.[0-9]+@".format(dockerfile_name), name):
@@ -212,7 +205,6 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
             files = self.generate_files(dry_run=True)
         dirname, filename = os.path.split(files[0])
         build_args = self._build_args.strip() + " " + build_args.strip()
-        build_tool = build_tool or self._BUILD_TOOL
         if build_tool == "docker":
             build_tool = "sudo docker"
         cmd = f'{build_tool} build {build_args}  --tag {self.get_img_name()}  --file={files[0]} "{dirname}/" {trailing_args}'

@@ -7,3 +7,5 @@ build_docker: gen
 	./build-all-docker.sh
 push_docker:
 	./push-all-docker.sh
+build_podman: gen
+	./build-all-podman.sh
