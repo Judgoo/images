@@ -21,3 +21,5 @@ docker push judgoo/rust1.51:v0.0.1
 docker push judgoo/scala2.13.5:v0.0.1
 docker push judgoo/swift5.3.3:v0.0.1
 docker push judgoo/typescript:v0.0.1
+docker push judgoo/base-alpine:v0.0.1
+docker push judgoo/base-debian:v0.0.1
