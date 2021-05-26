@@ -1,4 +1,4 @@
-FROM judgoo/base-debian:v0.0.1 as base_builder
+FROM judgoo/base-debian:v0.0.2 as base_builder
 FROM python:3.9-slim-buster
 RUN pip install --no-cache numpy pandas
 COPY --from=base_builder /tool/ /tool/

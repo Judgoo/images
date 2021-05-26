@@ -1,4 +1,4 @@
-FROM judgoo/base-alpine:v0.0.1 as base_builder
+FROM judgoo/base-alpine:v0.0.2 as base_builder
 FROM alpine:latest as build
 RUN apk add --no-cache xz make g++
 ENV VERSION=2021-03-27

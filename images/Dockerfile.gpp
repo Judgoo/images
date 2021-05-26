@@ -1,4 +1,4 @@
-FROM judgoo/base-debian:v0.0.1 as base_builder
+FROM judgoo/base-debian:v0.0.2 as base_builder
 FROM debian:buster-slim
 RUN apt-get update && \
 apt-get install -y --no-install-recommends g++ && \

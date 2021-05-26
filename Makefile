@@ -3,9 +3,18 @@ gen:
 clean_docker:
 	sudo docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs sudo docker rmi
 	sudo docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs sudo docker rmi --force
+clean_podman:
+	podman images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs podman rmi
+	podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
+
 build_docker: gen
-	./build-all-docker.sh
+	./docker-build-all.sh
 push_docker:
-	./push-all-docker.sh
+	./docker-push-all.sh
 build_podman: gen
-	./build-all-podman.sh
+	./podman-build-all.sh
+push_podman:
+	./podman-push-all.sh
+
+podman: build_podman push_podman
+	echo podman
