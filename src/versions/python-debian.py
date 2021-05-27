@@ -1,4 +1,4 @@
-from .helper import DebianBaseDockerFile
+from src.helper import DebianBaseDockerFile
 
 
 py27 = DebianBaseDockerFile("python2.7", base_img="python:2.7.18-slim-buster")

@@ -1,4 +1,4 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from src.helper.alpine_base import AlpineBaseDockerFile
 
 qjs_builder = AlpineBaseDockerFile("builder", base_img="alpine:latest")
 qjs_builder.RUN = "apk add --no-cache xz make g++"

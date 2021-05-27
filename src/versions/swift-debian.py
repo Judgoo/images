@@ -1,4 +1,4 @@
-from .helper import DebianBaseDockerFile
+from src.helper import DebianBaseDockerFile
 
 d = DebianBaseDockerFile("swift5.3.3", "swift:5.3.3-focal")
 d.add_judger()

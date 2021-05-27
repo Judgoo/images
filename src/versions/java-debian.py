@@ -1,4 +1,4 @@
-from .helper import DebianBaseDockerFile
+from src.helper import DebianBaseDockerFile
 
 d = DebianBaseDockerFile("openjdk11", "adoptopenjdk/openjdk11:debianslim-slim")
 d.add_judger()

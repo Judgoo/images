@@ -1,4 +1,4 @@
-from .helper import DebianBaseDockerFile
+from src.helper import DebianBaseDockerFile
 
 d = DebianBaseDockerFile("gpp")
 d.add_packages("g++")

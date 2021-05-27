@@ -1,4 +1,4 @@
-from .helper import AlpineBaseDockerFile
+from src.helper import AlpineBaseDockerFile
 
 d = AlpineBaseDockerFile("ruby")
 d.add_packages("ruby")

@@ -1,4 +1,4 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from src.helper.alpine_base import AlpineBaseDockerFile
 
 BASE_IMAGE = "julia:1.6.0-alpine3.13"
 

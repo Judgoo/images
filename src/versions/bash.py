@@ -1,4 +1,4 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from src.helper.alpine_base import AlpineBaseDockerFile
 
 d = AlpineBaseDockerFile("bash")
 d.add_packages("bash")

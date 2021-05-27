@@ -3,9 +3,9 @@ from os import listdir, remove
 from os.path import isfile, join
 from typing import List
 
-from generator import *  # noqa: F401
-from generator.helper.base import BaseDockerFile
-from generator.helper.constants import VERSION
+from src.versions import *  # noqa: F401
+from src.helper.base import BaseDockerFile
+from src.helper.constants import VERSION
 
 _s = {k: v for k, v in globals().items() if hasattr(v, "ALL_IMAGES")}
 

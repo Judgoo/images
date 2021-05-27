@@ -1,4 +1,4 @@
-from .helper import DebianBaseDockerFile
+from src.helper import DebianBaseDockerFile
 
 BASE_IMAGE = "adoptopenjdk/openjdk8:debianslim-slim"
 

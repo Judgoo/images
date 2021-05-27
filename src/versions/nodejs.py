@@ -1,4 +1,4 @@
-from .helper.alpine_base import AlpineBaseDockerFile
+from src.helper.alpine_base import AlpineBaseDockerFile
 
 BASE_IMAGE = "node:14-alpine3.13"
 
