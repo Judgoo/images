@@ -1,3 +1,4 @@
+from src.languages import CSharp
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("csharp")
@@ -9,5 +10,12 @@ apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/t
     apk del --no-cache .build-dependencies
 """.strip()
 d.add_judger()
+
+d._lang = CSharp
+d._recipe = {
+    "build": ["mcs -out:{output} {filename}"],
+    "run": "mono {output}",
+}
+
 
 ALL_IMAGES = [d]

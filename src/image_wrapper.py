@@ -1,11 +1,21 @@
+from typing import List, Type, TypedDict, Union
+from src.languages import Language
 from .helper import docker
 from .constants import VERSION
+
+
+class Recipe(TypedDict):
+    build: List[str]
+    run: str
 
 
 class ImageWrapper(docker.DockerFile):
     BASE_IMG: str
     OS: str
     _is_add_judger: bool
+
+    _lang: Union[Type[Language], List[Type[Language]]]
+    _recipe: Union[Recipe, List[Recipe]]
 
     def __init__(self, name: str, base_img=None, **kwargs):
         self._default_base_img = f"judgoo/base-{self.OS}:{VERSION}"

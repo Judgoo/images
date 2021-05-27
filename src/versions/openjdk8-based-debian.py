@@ -1,3 +1,4 @@
+from src.languages import Kotlin, Scala
 from src.image_wrapper import DebianImageWrapper
 
 BASE_IMAGE = "adoptopenjdk/openjdk8:debianslim-slim"
@@ -21,6 +22,11 @@ scala.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wge
     apt-get autoclean -y && \\
     rm -rf "/tmp/"*
 """
+scala._lang = Scala
+scala._recipe = {
+    "build": ["scalac {filename}"],
+    "run": "scala {output}",
+}
 
 KOTLIN_VERSION = "1.4.32"
 COMPILER_URL = f"https://github.com/JetBrains/kotlin/releases/download/v{KOTLIN_VERSION}/kotlin-compiler-{KOTLIN_VERSION}.zip"
@@ -40,6 +46,12 @@ kt.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wget u
 """
 
 kt.ENV = "PATH $PATH:/usr/lib/kotlinc/bin"
+
+kt._lang = Kotlin
+kt._recipe = {
+    "build": ["kotlinc {filename}"],
+    "run": "kotlin {filestem}Kt",
+}
 
 
 ALL_IMAGES = [scala, kt]

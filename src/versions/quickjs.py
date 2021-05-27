@@ -1,3 +1,4 @@
+from src.languages import JavaScript
 from src.image_wrapper import AlpineImageWrapper
 
 qjs_builder = AlpineImageWrapper("builder", base_img="alpine:latest")
@@ -17,5 +18,13 @@ qjs.add_builder(qjs_builder, "build")
 
 qjs.COPY = "--from=build /out /usr/local/bin/"
 qjs.add_judger()
+
+
+qjs._lang = JavaScript
+qjs._recipe = {
+    "build": [],
+    "run": "qjs {filename}",
+}
+
 
 ALL_IMAGES = [qjs]
