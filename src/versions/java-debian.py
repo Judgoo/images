@@ -1,6 +1,6 @@
-from src.helper import DebianBaseDockerFile
+from src.image_wrapper import DebianImageWrapper
 
-d = DebianBaseDockerFile("openjdk11", "adoptopenjdk/openjdk11:debianslim-slim")
+d = DebianImageWrapper("openjdk11", "adoptopenjdk/openjdk11:debianslim-slim")
 d.add_judger()
 
 ALL_IMAGES = [d]

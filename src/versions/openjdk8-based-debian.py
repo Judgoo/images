@@ -1,11 +1,11 @@
-from src.helper import DebianBaseDockerFile
+from src.image_wrapper import DebianImageWrapper
 
 BASE_IMAGE = "adoptopenjdk/openjdk8:debianslim-slim"
 
 SCALA_VERSION = "2.13.5"
 SCALA_HOME = "/usr/share/scala"
 
-scala = DebianBaseDockerFile(f"scala{SCALA_VERSION}", BASE_IMAGE)
+scala = DebianImageWrapper(f"scala{SCALA_VERSION}", BASE_IMAGE)
 scala.add_judger()
 scala.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wget && \\
     rm -rf /var/lib/apt/lists/* && \\
@@ -25,7 +25,7 @@ scala.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wge
 KOTLIN_VERSION = "1.4.32"
 COMPILER_URL = f"https://github.com/JetBrains/kotlin/releases/download/v{KOTLIN_VERSION}/kotlin-compiler-{KOTLIN_VERSION}.zip"
 
-kt = DebianBaseDockerFile(f"kotlin{KOTLIN_VERSION}", BASE_IMAGE)
+kt = DebianImageWrapper(f"kotlin{KOTLIN_VERSION}", BASE_IMAGE)
 kt.add_judger()
 kt.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wget unzip && \\
     rm -rf /var/lib/apt/lists/* && \\

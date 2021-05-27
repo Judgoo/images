@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("haskell")
+d = AlpineImageWrapper("haskell")
 d.add_packages("ghc")
 d.add_judger()
 

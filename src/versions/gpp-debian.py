@@ -1,6 +1,6 @@
-from src.helper import DebianBaseDockerFile
+from src.image_wrapper import DebianImageWrapper
 
-d = DebianBaseDockerFile("gpp")
+d = DebianImageWrapper("gpp")
 d.add_packages("g++")
 d.add_judger()
 

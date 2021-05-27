@@ -1,13 +1,8 @@
-import sys
-import logging
-from . import docker
+from .helper import docker
 from .constants import VERSION
 
-logging.getLogger("").setLevel(logging.INFO)
-logging.root.addHandler(logging.StreamHandler(sys.stdout))
 
-
-class BaseDockerFile(docker.DockerFile):
+class ImageWrapper(docker.DockerFile):
     BASE_IMG: str
     OS: str
     _is_add_judger: bool
@@ -27,7 +22,7 @@ class BaseDockerFile(docker.DockerFile):
         if ":" not in name:
             name = f"{name}:{VERSION}"
         kwargs = {"build_tool": "docker", **kwargs}
-        super(BaseDockerFile, self).__init__(base_img, name, **kwargs)
+        super(ImageWrapper, self).__init__(base_img, name, **kwargs)
 
     def generate_files(self, **kwargs):
         kwargs.pop("path", None)
@@ -44,3 +39,21 @@ class BaseDockerFile(docker.DockerFile):
         self.WORKDIR = "/workspace"
         self.ENTRYPOINT = ["Judger"]
         self._is_add_judger = True
+
+
+class AlpineImageWrapper(ImageWrapper):
+    BASE_IMG = "alpine:3.13"
+    OS = "alpine"
+
+    def add_packages(self, *packages):
+        self.RUN = f"apk add --no-cache {' '.join(packages)}"
+
+
+class DebianImageWrapper(ImageWrapper):
+    BASE_IMG = "debian:buster-slim"
+    OS = "debian"
+
+    def add_packages(self, *packages):
+        self.RUN = f"""apt-get update && \\
+apt-get install -y --no-install-recommends {' '.join(packages)} && \\
+rm -rf /var/lib/apt/lists/*"""

@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("csharp")
+d = AlpineImageWrapper("csharp")
 
 d.RUN = """
 apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && \\

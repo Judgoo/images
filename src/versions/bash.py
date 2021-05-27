@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("bash")
+d = AlpineImageWrapper("bash")
 d.add_packages("bash")
 d.add_judger()
 

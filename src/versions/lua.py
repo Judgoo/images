@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("lua")
+d = AlpineImageWrapper("lua")
 d.add_packages("lua")
 d.add_judger()
 

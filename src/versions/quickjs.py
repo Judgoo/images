@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-qjs_builder = AlpineBaseDockerFile("builder", base_img="alpine:latest")
+qjs_builder = AlpineImageWrapper("builder", base_img="alpine:latest")
 qjs_builder.RUN = "apk add --no-cache xz make g++"
 qjs_builder.ENV = "VERSION=2021-03-27"
 qjs_builder.ADD = "https://bellard.org/quickjs/quickjs-${VERSION}.tar.xz /tmp"
@@ -12,7 +12,7 @@ qjs_builder.RUN = """ cd /tmp \
   && mv qjs qjsc qjscalc /out
 """
 
-qjs = AlpineBaseDockerFile("quickjs-2021-03-27")
+qjs = AlpineImageWrapper("quickjs-2021-03-27")
 qjs.add_builder(qjs_builder, "build")
 
 qjs.COPY = "--from=build /out /usr/local/bin/"

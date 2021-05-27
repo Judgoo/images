@@ -1,6 +1,6 @@
-from src.helper import DebianBaseDockerFile
+from src.image_wrapper import DebianImageWrapper
 
-d = DebianBaseDockerFile("rust1.51", "rust:1.51-slim-buster")
+d = DebianImageWrapper("rust1.51", "rust:1.51-slim-buster")
 d.add_judger()
 
 ALL_IMAGES = [d]

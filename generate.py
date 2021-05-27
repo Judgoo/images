@@ -1,18 +1,20 @@
 import os
-from os import listdir, remove
+from os import listdir, makedirs, remove
 from os.path import isfile, join
 from typing import List
 
 from src.versions import *  # noqa: F401
-from src.helper.base import BaseDockerFile
-from src.helper.constants import VERSION
+from src.image_wrapper import ImageWrapper
+from src.constants import VERSION
 
 _s = {k: v for k, v in globals().items() if hasattr(v, "ALL_IMAGES")}
 
-all_images: List[BaseDockerFile] = []
+all_images: List[ImageWrapper] = []
 
 for k, v in _s.items():
     all_images.extend(v.ALL_IMAGES)
+
+makedirs("./images", exist_ok=True)
 
 for f in listdir("./images"):
     p = join("./images", f)

@@ -1,6 +1,6 @@
-from src.helper import DebianBaseDockerFile
+from src.image_wrapper import DebianImageWrapper
 
-d = DebianBaseDockerFile("swift5.3.3", "swift:5.3.3-focal")
+d = DebianImageWrapper("swift5.3.3", "swift:5.3.3-focal")
 d.add_judger()
 d.ENV = "PATH $PATH:/usr/lib/"
 

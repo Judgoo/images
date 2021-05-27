@@ -1,6 +1,6 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("php7")
+d = AlpineImageWrapper("php7")
 d.add_packages("php")
 d.add_judger()
 

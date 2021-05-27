@@ -1,8 +1,7 @@
-from src.helper.alpine_base import AlpineBaseDockerFile
+from src.image_wrapper import AlpineImageWrapper
 
-d = AlpineBaseDockerFile("nasm")
+d = AlpineImageWrapper("nasm")
 d.add_packages("binutils", "nasm")
 d.add_judger()
-
 
 ALL_IMAGES = [d]
