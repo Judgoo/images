@@ -1,6 +1,7 @@
 docker push judgoo/bash:v0.0.2
 docker push judgoo/csharp:v0.0.2
 docker push judgoo/dlang2:v0.0.2
+docker push judgoo/esbuild:v0.0.2
 docker push judgoo/golang:v0.0.2
 docker push judgoo/gpp:v0.0.2
 docker push judgoo/haskell:v0.0.2
@@ -20,6 +21,5 @@ docker push judgoo/ruby:v0.0.2
 docker push judgoo/rust1.51:v0.0.2
 docker push judgoo/scala2.13.5:v0.0.2
 docker push judgoo/swift5.3.3:v0.0.2
-docker push judgoo/typescript:v0.0.2
 docker push judgoo/base-alpine:v0.0.2
 docker push judgoo/base-debian:v0.0.2

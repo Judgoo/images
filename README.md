@@ -49,3 +49,32 @@ podman 需要指定登录地址为 docker.io：
 ```bash
 podman login docker.io
 ```
+
+## 架构
+
+每种 Language 就是一种语言，比如说 Javascript、Python。
+
+每个 Version 就是同一个 Language 的不同版本，比如说 JavaScript 有 Nodejs14, Nodejs16, QuickJS 等。
+
+每种 Recipe 就是指某种运行代码的方式，是一个字典，例子如下。
+
+```python
+nasm_recipe = {
+    "id": "nasm",
+    "name": "NASM 2.15.05",
+    "build": [
+        "nasm -f elf64 -o a.o {filename}",
+        "ld -o {output} a.o",
+    ],
+    "run": "./{output}",
+}
+
+bash_recipe = {
+    "id": "bash",
+    "name": "Bash(5.1.0)",
+    "build": [],
+    "run": "bash {filename}",
+}
+```
+
+每个 Recipe 有全局唯一的 ID 值，与 Version 是组合的关系。比如说 Nodejs14 和 Nodejs16 都共享一个叫 id 为 `nodejs` 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。

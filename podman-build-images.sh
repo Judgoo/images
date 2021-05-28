@@ -1,6 +1,7 @@
 podman build --tag judgoo/bash:v0.0.2 --file=./images/Dockerfile.bash "./images/"
 podman build --tag judgoo/csharp:v0.0.2 --file=./images/Dockerfile.csharp "./images/"
 podman build --tag judgoo/dlang2:v0.0.2 --file=./images/Dockerfile.dlang2 "./images/"
+podman build --shm-size 512M --tag judgoo/esbuild:v0.0.2 --file=./images/Dockerfile.esbuild "./images/"
 podman build --tag judgoo/golang:v0.0.2 --file=./images/Dockerfile.golang "./images/"
 podman build --tag judgoo/gpp:v0.0.2 --file=./images/Dockerfile.gpp "./images/"
 podman build --tag judgoo/haskell:v0.0.2 --file=./images/Dockerfile.haskell "./images/"
@@ -20,4 +21,3 @@ podman build --tag judgoo/ruby:v0.0.2 --file=./images/Dockerfile.ruby "./images/
 podman build --tag judgoo/rust1.51:v0.0.2 --file=./images/Dockerfile.rust1.51 "./images/"
 podman build --tag judgoo/scala2.13.5:v0.0.2 --file=./images/Dockerfile.scala2.13.5 "./images/"
 podman build --tag judgoo/swift5.3.3:v0.0.2 --file=./images/Dockerfile.swift5.3.3 "./images/"
-podman build --shm-size 512M --tag judgoo/typescript:v0.0.2 --file=./images/Dockerfile.typescript "./images/"

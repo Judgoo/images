@@ -75,13 +75,15 @@ class DockerFile(object):
             raise ValueError(
                 'invalid img name "{}", ' 'should be as "local/base:0.0.1"'.format(name)
             )
-        self._namespace = _r.group("namespace")
-        self._name = _r.group("name")
-        self._version = _r.group("version")
+        self._image_namespace = _r.group("namespace")
+        self._image_name = _r.group("name")
+        self._image_version = _r.group("version")
         self._build_args = kwargs.pop("build_args", "")
 
     def get_img_name(self):
-        return "{}/{}:{}".format(self._namespace, self._name, self._version)
+        return "{}/{}:{}".format(
+            self._image_namespace, self._image_name, self._image_version
+        )
 
     def __setattr__(self, key, value):
         if key.startswith("_"):
@@ -157,7 +159,7 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
 
     def _get_dockerfile(self, dockerfile_name=None):
         if dockerfile_name is None:
-            dockerfile_name = "Dockerfile.{}".format(self._name)
+            dockerfile_name = "Dockerfile.{}".format(self._image_name)
 
         result = ""
         files = []

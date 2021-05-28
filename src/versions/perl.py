@@ -1,4 +1,4 @@
-from src.languages import Perl
+from src import recipes, languages
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("perl")
@@ -6,13 +6,12 @@ d.add_packages("perl")
 d.add_judger()
 
 
-d._lang = Perl
-d._recipe = {
-    "build": [],
-    "run": "perl {filename}",
+d._lang = languages.Perl
+d._version = {
+    "id": "perl",
+    "name": "Perl 5.32.0",
+    "recipe": recipes.Perl,
 }
-
-
 
 
 ALL_IMAGES = [d]

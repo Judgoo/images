@@ -1,6 +1,7 @@
 sudo docker build --tag judgoo/bash:v0.0.2 --file=./images/Dockerfile.bash "./images/"
 sudo docker build --tag judgoo/csharp:v0.0.2 --file=./images/Dockerfile.csharp "./images/"
 sudo docker build --tag judgoo/dlang2:v0.0.2 --file=./images/Dockerfile.dlang2 "./images/"
+sudo docker build --shm-size 512M --tag judgoo/esbuild:v0.0.2 --file=./images/Dockerfile.esbuild "./images/"
 sudo docker build --tag judgoo/golang:v0.0.2 --file=./images/Dockerfile.golang "./images/"
 sudo docker build --tag judgoo/gpp:v0.0.2 --file=./images/Dockerfile.gpp "./images/"
 sudo docker build --tag judgoo/haskell:v0.0.2 --file=./images/Dockerfile.haskell "./images/"
@@ -20,4 +21,3 @@ sudo docker build --tag judgoo/ruby:v0.0.2 --file=./images/Dockerfile.ruby "./im
 sudo docker build --tag judgoo/rust1.51:v0.0.2 --file=./images/Dockerfile.rust1.51 "./images/"
 sudo docker build --tag judgoo/scala2.13.5:v0.0.2 --file=./images/Dockerfile.scala2.13.5 "./images/"
 sudo docker build --tag judgoo/swift5.3.3:v0.0.2 --file=./images/Dockerfile.swift5.3.3 "./images/"
-sudo docker build --shm-size 512M --tag judgoo/typescript:v0.0.2 --file=./images/Dockerfile.typescript "./images/"

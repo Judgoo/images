@@ -1,6 +1,7 @@
 podman push judgoo/bash:v0.0.2
 podman push judgoo/csharp:v0.0.2
 podman push judgoo/dlang2:v0.0.2
+podman push judgoo/esbuild:v0.0.2
 podman push judgoo/golang:v0.0.2
 podman push judgoo/gpp:v0.0.2
 podman push judgoo/haskell:v0.0.2
@@ -20,6 +21,5 @@ podman push judgoo/ruby:v0.0.2
 podman push judgoo/rust1.51:v0.0.2
 podman push judgoo/scala2.13.5:v0.0.2
 podman push judgoo/swift5.3.3:v0.0.2
-podman push judgoo/typescript:v0.0.2
 podman push judgoo/base-alpine:v0.0.2
 podman push judgoo/base-debian:v0.0.2

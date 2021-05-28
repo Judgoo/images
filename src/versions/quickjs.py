@@ -1,4 +1,4 @@
-from src.languages import JavaScript
+from src import recipes, languages
 from src.image_wrapper import AlpineImageWrapper
 
 qjs_builder = AlpineImageWrapper("builder", base_img="alpine:latest")
@@ -20,10 +20,11 @@ qjs.COPY = "--from=build /out /usr/local/bin/"
 qjs.add_judger()
 
 
-qjs._lang = JavaScript
-qjs._recipe = {
-    "build": [],
-    "run": "qjs {filename}",
+qjs._lang = languages.JavaScript
+qjs._version = {
+    "id": "quickjs-2021-03-27",
+    "name": "QuickJS 2021-03-27",
+    "recipe": recipes.QJS,
 }
 
 

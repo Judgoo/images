@@ -1,14 +1,15 @@
-from src.languages import Lua
+from src import recipes, languages
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("lua")
 d.add_packages("lua")
 d.add_judger()
 
-d._lang = Lua
-d._recipe = {
-    "build": [],
-    "run": "lua {filename}",
+d._lang = languages.Lua
+d._version = {
+    "id": "lua",
+    "name": "Lua 5.1.5",
+    "recipe": recipes.Lua,
 }
 
 

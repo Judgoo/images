@@ -1,4 +1,4 @@
-from src.languages import D
+from src import recipes, languages
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("dlang2")
@@ -6,10 +6,11 @@ d.add_packages("dmd", "gcc", "musl-dev")
 d.add_judger()
 
 
-d._lang = D
-d._recipe = {
-    "build": ["dmd -of={output} {filename}"],
-    "run": "./{output}",
+d._lang = languages.D
+d._version = {
+    "id": "dlang2",
+    "name": "DMD v2.095.0",
+    "recipe": recipes.DLang,
 }
 
 

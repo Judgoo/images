@@ -1,11 +1,20 @@
 import os
+from collections import defaultdict
 from os import listdir, makedirs, remove
 from os.path import isfile, join
-from typing import List
+from typing import Any, DefaultDict, Dict, List
 
-from src.versions import *  # noqa: F401
+from yaml import dump
+
+from src.constants import JUDGOO_VERSION
 from src.image_wrapper import ImageWrapper
-from src.constants import VERSION
+from src.versions import *  # noqa: F401
+
+
+def write_file(filename, content):
+    with open(filename, "w") as f:
+        f.write(content)
+
 
 _s = {k: v for k, v in globals().items() if hasattr(v, "ALL_IMAGES")}
 
@@ -45,8 +54,8 @@ def gen(build_tool):
                 image.add_judger()
             f.write(f"{build_tool} push {image.get_img_name()}\n")
             f.flush()
-        f.write(f"{build_tool} push judgoo/base-alpine:{VERSION}\n")
-        f.write(f"{build_tool} push judgoo/base-debian:{VERSION}\n")
+        f.write(f"{build_tool} push judgoo/base-alpine:{JUDGOO_VERSION}\n")
+        f.write(f"{build_tool} push judgoo/base-debian:{JUDGOO_VERSION}\n")
     os.chmod(push_all, 0o0777)
 
     if build_tool == "docker":
@@ -55,8 +64,8 @@ def gen(build_tool):
     with open(build_all, "w+") as f:
         f.writelines(
             [
-                f"{build_tool} build -t judgoo/base-alpine:{VERSION} -f ./base/Dockerfile.alpine.base ./base\n",
-                f"{build_tool} build -t judgoo/base-debian:{VERSION} -f ./base/Dockerfile.debian.base ./base\n",
+                f"{build_tool} build -t judgoo/base-alpine:{JUDGOO_VERSION} -f ./base/Dockerfile.alpine.base ./base\n",
+                f"{build_tool} build -t judgoo/base-debian:{JUDGOO_VERSION} -f ./base/Dockerfile.debian.base ./base\n",
                 "\n",
                 f"sh {build_sh}\n",
             ]
@@ -67,3 +76,43 @@ def gen(build_tool):
 
 gen("docker")
 gen("podman")
+
+
+def generate_dependency_map(all_images: List[ImageWrapper]):
+    map_lang2version: DefaultDict[str, List[str]] = defaultdict(list)
+    version_name2recipe: DefaultDict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for image in all_images:
+        print(image._image_name)
+        version = image._version_name
+        langs = image._lang if isinstance(image._lang, list) else [image._lang]
+        versions = (
+            image._version if isinstance(image._version, list) else [image._version]
+        )
+
+        if len(langs) != len(versions):
+            print(f"{image._image_name} langs and versions length not equal")
+            return
+        for lang, version in zip(langs, versions):
+            recipe = version["recipe"]
+            _result: Dict[str, Any] = {
+                "build": [i.format_map(lang.to_dict()) for i in recipe.build],
+                "run": recipe.run.format_map(lang.to_dict()),
+                "name": version["name"],
+                "image": image.get_img_name(),
+                **lang.to_dict(),
+            }
+            map_lang2version[lang.__name__].append(version["id"])
+            version_name2recipe[version["id"]].append(_result)
+
+    write_file("languages.yml", dump(dict(map_lang2version)))
+    write_file(
+        "versions.yml",
+        dump(
+            dict(version_name2recipe),
+            indent=2,
+            explicit_start=True,
+        ),
+    )
+
+
+generate_dependency_map(all_images)

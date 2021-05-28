@@ -1,15 +1,24 @@
-from dataclasses import dataclass
-from src.image_wrapper import Recipe
-from typing import Optional
-
-
-@dataclass(init=False)
 class Language:
     filestem: str = "main"
     ext: str = "txt"
-    output: Optional[str]
+    # 只为编译型语言设置的字段
+    output: str = "a.out"
     mco: bool = False
-    recipe: Optional[Recipe]
+
+    @classmethod
+    @property
+    def filename(cls):
+        return f"{cls.filestem}.{cls.ext}"
+
+    @classmethod
+    def to_dict(cls):
+        return {
+            "filestem": cls.filestem,
+            "filename": cls.filename,
+            "ext": cls.ext,
+            "output": cls.output,
+            "mco": cls.mco,
+        }
 
 
 class Assembly(Language):
@@ -84,11 +93,6 @@ class PHP(Language):
 class Python(Language):
     ext = "py"
     mco = True
-
-    recipe = {
-        "build": [],
-        "run": "python {filename}",
-    }
 
 
 class Ruby(Language):

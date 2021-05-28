@@ -1,4 +1,4 @@
-from src.languages import C, Cpp
+from src import recipes, languages
 from src.image_wrapper import DebianImageWrapper
 
 d = DebianImageWrapper("gpp")
@@ -6,15 +6,17 @@ d.add_packages("g++")
 d.add_judger()
 
 
-d._lang = [C, Cpp]
-d._recipe = [
+d._lang = [languages.C, languages.Cpp]
+d._version = [
     {
-        "build": ["gcc -lm -w -O3 -std=gnu17 {filename} -o {output}"],
-        "run": "./{output}",
+        "id": "gcc",
+        "name": "GCC 8.3.0",
+        "recipe": recipes.GCC,
     },
     {
-        "build": ["g++ -lm -w -O3 -std=gnu++17 {filename} -o {output}"],
-        "run": "./{output}",
+        "id": "gpp",
+        "name": "G++ 8.3.0",
+        "recipe": recipes.GPP,
     },
 ]
 

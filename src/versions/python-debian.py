@@ -1,17 +1,26 @@
-from src.languages import Python
+from src import recipes, languages
 from src.image_wrapper import DebianImageWrapper
 
 
 py27 = DebianImageWrapper("python2.7", base_img="python:2.7.18-slim-buster")
 py27.RUN = "pip install --no-cache numpy pandas"
 py27.add_judger()
-py27._lang = Python
-
+py27._lang = languages.Python
+py27._version = {
+    "id": "py27",
+    "name": "Python 2.7.18",
+    "recipe": recipes.Python,
+}
 
 py39 = DebianImageWrapper("python3.9", base_img="python:3.9-slim-buster")
 py39.RUN = "pip install --no-cache numpy pandas"
 py39.add_judger()
-py39._lang = Python
+py39._lang = languages.Python
+py39._version = {
+    "id": "py39",
+    "name": "Python 3.9.4",
+    "recipe": recipes.Python,
+}
 
 
 ALL_IMAGES = [py27, py39]

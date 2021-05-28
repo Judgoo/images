@@ -1,4 +1,4 @@
-from src.languages import CSharp
+from src import recipes, languages
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("csharp")
@@ -11,10 +11,11 @@ apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/t
 """.strip()
 d.add_judger()
 
-d._lang = CSharp
-d._recipe = {
-    "build": ["mcs -out:{output} {filename}"],
-    "run": "mono {output}",
+d._lang = languages.CSharp
+d._version = {
+    "id": "csharp",
+    "name": "Mono 6.12.0.122",
+    "recipe": recipes.CSharp,
 }
 
 

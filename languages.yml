@@ -1,0 +1,47 @@
+Assembly:
+- nasm
+Bash:
+- bash
+C:
+- gcc
+CSharp:
+- csharp
+Cpp:
+- gpp
+D:
+- dlang2
+Go:
+- golang1.16
+Haskell:
+- haskell
+Java:
+- openjdk8
+- openjdk11
+JavaScript:
+- nodejs14
+- quickjs-2021-03-27
+Julia:
+- julia1.6
+Kotlin:
+- kotlin1.4
+Lua:
+- lua
+Ocaml:
+- ocaml
+PHP:
+- php7
+Perl:
+- perl
+Python:
+- py27
+- py39
+Ruby:
+- ruby
+Rust:
+- rust1.51
+Scala:
+- scala2.13
+Swift:
+- swift
+TypeScript:
+- esbuild

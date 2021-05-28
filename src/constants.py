@@ -1,1 +1,1 @@
-VERSION = "v0.0.2"
+JUDGOO_VERSION = "v0.0.2"

@@ -1,12 +1,16 @@
-from typing import List, Type, TypedDict, Union
-from src.languages import Language
+from src.recipes import Recipe
+from typing import List, Type, TypedDict, Union, TYPE_CHECKING
 from .helper import docker
-from .constants import VERSION
+from .constants import JUDGOO_VERSION
+
+if TYPE_CHECKING:
+    from src.languages import Language
 
 
-class Recipe(TypedDict):
-    build: List[str]
-    run: str
+class Version(TypedDict):
+    recipe: Type[Recipe]
+    id: str
+    name: str
 
 
 class ImageWrapper(docker.DockerFile):
@@ -14,23 +18,22 @@ class ImageWrapper(docker.DockerFile):
     OS: str
     _is_add_judger: bool
 
-    _lang: Union[Type[Language], List[Type[Language]]]
-    _recipe: Union[Recipe, List[Recipe]]
+    _lang: Union[Type["Language"], List[Type["Language"]]]
+    _version: Union[Version, List[Version]]
 
     def __init__(self, name: str, base_img=None, **kwargs):
-        self._default_base_img = f"judgoo/base-{self.OS}:{VERSION}"
+        self._default_base_img = f"judgoo/base-{self.OS}:{JUDGOO_VERSION}"
         self._is_add_judger = False
         if base_img is None:
             base_img = self.BASE_IMG
-
+        self._version_name = name
         use_judgoo = kwargs.get("use_judgoo")
         if use_judgoo:
             base_img = self._default_base_img
-
         if not name.startswith("judgoo/"):
             name = f"judgoo/{name}"
         if ":" not in name:
-            name = f"{name}:{VERSION}"
+            name = f"{name}:{JUDGOO_VERSION}"
         kwargs = {"build_tool": "docker", **kwargs}
         super(ImageWrapper, self).__init__(base_img, name, **kwargs)
 
