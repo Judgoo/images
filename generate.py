@@ -80,7 +80,7 @@ gen("podman")
 
 def generate_dependency_map(all_images: List[ImageWrapper]):
     map_lang2version: DefaultDict[str, List[str]] = defaultdict(list)
-    version_name2recipe: DefaultDict[str, List[Dict[str, Any]]] = defaultdict(list)
+    version_name2recipe: Dict[str, Dict[str, Any]] = dict()
     for image in all_images:
         print(image._image_name)
         version = image._version_name
@@ -102,7 +102,7 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
                 **lang.to_dict(),
             }
             map_lang2version[lang.__name__].append(version["id"])
-            version_name2recipe[version["id"]].append(_result)
+            version_name2recipe[version["id"]] = _result
 
     write_file("languages.json", dumps(map_lang2version, indent=2))
     write_file("versions.json", dumps(version_name2recipe, indent=2))
