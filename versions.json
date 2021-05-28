@@ -1,0 +1,356 @@
+{
+  "bash": [
+    {
+      "build": [],
+      "run": "bash main.bash",
+      "name": "Bash(5.1.0)",
+      "image": "judgoo/bash:v0.0.2",
+      "filestem": "main",
+      "filename": "main.bash",
+      "ext": "bash",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "csharp": [
+    {
+      "build": [
+        "mcs -out:a.exe main.cs"
+      ],
+      "run": "mono a.exe",
+      "name": "Mono 6.12.0.122",
+      "image": "judgoo/csharp:v0.0.2",
+      "filestem": "main",
+      "filename": "main.cs",
+      "ext": "cs",
+      "output": "a.exe",
+      "mco": false
+    }
+  ],
+  "dlang2": [
+    {
+      "build": [
+        "dmd -of=a.out main.d"
+      ],
+      "run": "./a.out",
+      "name": "DMD v2.095.0",
+      "image": "judgoo/dlang2:v0.0.2",
+      "filestem": "main",
+      "filename": "main.d",
+      "ext": "d",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "esbuild": [
+    {
+      "build": [
+        "esbuild main.ts --outfile=a.js --platform=node --target=node14"
+      ],
+      "run": "node a.js",
+      "name": "esbuild 0.11.14",
+      "image": "judgoo/esbuild:v0.0.2",
+      "filestem": "main",
+      "filename": "main.ts",
+      "ext": "ts",
+      "output": "a.js",
+      "mco": true
+    }
+  ],
+  "golang1.16": [
+    {
+      "build": [
+        "go build -o a.out main.go"
+      ],
+      "run": "./a.out",
+      "name": "Go 1.16.3",
+      "image": "judgoo/golang:v0.0.2",
+      "filestem": "main",
+      "filename": "main.go",
+      "ext": "go",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "gcc": [
+    {
+      "build": [
+        "gcc -lm -w -O3 -std=gnu17 main.c -o a.out"
+      ],
+      "run": "./a.out",
+      "name": "GCC 8.3.0",
+      "image": "judgoo/gpp:v0.0.2",
+      "filestem": "main",
+      "filename": "main.c",
+      "ext": "c",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "gpp": [
+    {
+      "build": [
+        "g++ -lm -w -O3 -std=gnu++17 main.cpp -o a.out"
+      ],
+      "run": "./a.out",
+      "name": "G++ 8.3.0",
+      "image": "judgoo/gpp:v0.0.2",
+      "filestem": "main",
+      "filename": "main.cpp",
+      "ext": "cpp",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "haskell": [
+    {
+      "build": [],
+      "run": "runghc main.hs",
+      "name": "GHC 8.8.4",
+      "image": "judgoo/haskell:v0.0.2",
+      "filestem": "main",
+      "filename": "main.hs",
+      "ext": "hs",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "julia1.6": [
+    {
+      "build": [],
+      "run": "julia main.jl",
+      "name": "Julia 1.6.0",
+      "image": "judgoo/julia1.6:v0.0.2",
+      "filestem": "main",
+      "filename": "main.jl",
+      "ext": "jl",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "kotlin1.4": [
+    {
+      "build": [
+        "kotlinc Main.kt"
+      ],
+      "run": "kotlin MainKt",
+      "name": "Kotlin 1.4.32",
+      "image": "judgoo/kotlin1.4.32:v0.0.2",
+      "filestem": "Main",
+      "filename": "Main.kt",
+      "ext": "kt",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "openjdk8": [
+    {
+      "build": [
+        "javac Main.java"
+      ],
+      "run": "java Main",
+      "name": "OpenJDK 1.8.0",
+      "image": "judgoo/kotlin1.4.32:v0.0.2",
+      "filestem": "Main",
+      "filename": "Main.java",
+      "ext": "java",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "lua": [
+    {
+      "build": [],
+      "run": "lua main.lua",
+      "name": "Lua 5.1.5",
+      "image": "judgoo/lua:v0.0.2",
+      "filestem": "main",
+      "filename": "main.lua",
+      "ext": "lua",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "nasm": [
+    {
+      "build": [
+        "nasm -f elf64 -o a.o main.asm",
+        "ld -o a.out a.o"
+      ],
+      "run": "./a.out",
+      "name": "NASM 2.15.05",
+      "image": "judgoo/nasm:v0.0.2",
+      "filestem": "main",
+      "filename": "main.asm",
+      "ext": "asm",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "nodejs14": [
+    {
+      "build": [],
+      "run": "node main.js",
+      "name": "Node.js 14.16.1",
+      "image": "judgoo/nodejs14:v0.0.2",
+      "filestem": "main",
+      "filename": "main.js",
+      "ext": "js",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "ocaml": [
+    {
+      "build": [
+        "ocamlc -o a.out main.ml"
+      ],
+      "run": "./a.out",
+      "name": "Ocaml 4.12.0",
+      "image": "judgoo/ocaml:v0.0.2",
+      "filestem": "main",
+      "filename": "main.ml",
+      "ext": "ml",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "openjdk11": [
+    {
+      "build": [
+        "javac Main.java"
+      ],
+      "run": "java Main",
+      "name": "OpenJDK 11.0.10",
+      "image": "judgoo/openjdk11:v0.0.2",
+      "filestem": "Main",
+      "filename": "Main.java",
+      "ext": "java",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "perl": [
+    {
+      "build": [],
+      "run": "perl main.pl",
+      "name": "Perl 5.32.0",
+      "image": "judgoo/perl:v0.0.2",
+      "filestem": "main",
+      "filename": "main.pl",
+      "ext": "pl",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "php7": [
+    {
+      "build": [],
+      "run": "php main.php",
+      "name": "PHP 7.4.15",
+      "image": "judgoo/php7:v0.0.2",
+      "filestem": "main",
+      "filename": "main.php",
+      "ext": "php",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "py27": [
+    {
+      "build": [],
+      "run": "python main.py",
+      "name": "Python 2.7.18",
+      "image": "judgoo/python2.7:v0.0.2",
+      "filestem": "main",
+      "filename": "main.py",
+      "ext": "py",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "py39": [
+    {
+      "build": [],
+      "run": "python main.py",
+      "name": "Python 3.9.4",
+      "image": "judgoo/python3.9:v0.0.2",
+      "filestem": "main",
+      "filename": "main.py",
+      "ext": "py",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "quickjs-2021-03-27": [
+    {
+      "build": [],
+      "run": "qjs main.js",
+      "name": "QuickJS 2021-03-27",
+      "image": "judgoo/quickjs-2021-03-27:v0.0.2",
+      "filestem": "main",
+      "filename": "main.js",
+      "ext": "js",
+      "output": "a.out",
+      "mco": true
+    }
+  ],
+  "ruby": [
+    {
+      "build": [],
+      "run": "ruby main.rb",
+      "name": "Ruby 2.7.3",
+      "image": "judgoo/ruby:v0.0.2",
+      "filestem": "main",
+      "filename": "main.rb",
+      "ext": "rb",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "rust1.51": [
+    {
+      "build": [
+        "rustc -o a.out main.rs"
+      ],
+      "run": "./a.out",
+      "name": "Rust 1.51.0",
+      "image": "judgoo/rust1.51:v0.0.2",
+      "filestem": "main",
+      "filename": "main.rs",
+      "ext": "rs",
+      "output": "a.out",
+      "mco": false
+    }
+  ],
+  "scala2.13": [
+    {
+      "build": [
+        "scalac main.scala"
+      ],
+      "run": "scala Main",
+      "name": "Scala 2.13.5",
+      "image": "judgoo/scala2.13.5:v0.0.2",
+      "filestem": "main",
+      "filename": "main.scala",
+      "ext": "scala",
+      "output": "Main",
+      "mco": false
+    }
+  ],
+  "swift": [
+    {
+      "build": [
+        "swiftc -o a.out main.swift"
+      ],
+      "run": "./a.out",
+      "name": "Swift 5.3.3",
+      "image": "judgoo/swift5.3.3:v0.0.2",
+      "filestem": "main",
+      "filename": "main.swift",
+      "ext": "swift",
+      "output": "a.out",
+      "mco": false
+    }
+  ]
+}

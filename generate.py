@@ -4,11 +4,11 @@ from os import listdir, makedirs, remove
 from os.path import isfile, join
 from typing import Any, DefaultDict, Dict, List
 
-from yaml import dump
 
 from src.constants import JUDGOO_VERSION
 from src.image_wrapper import ImageWrapper
 from src.versions import *  # noqa: F401
+from json import dumps
 
 
 def write_file(filename, content):
@@ -104,15 +104,8 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
             map_lang2version[lang.__name__].append(version["id"])
             version_name2recipe[version["id"]].append(_result)
 
-    write_file("languages.yml", dump(dict(map_lang2version)))
-    write_file(
-        "versions.yml",
-        dump(
-            dict(version_name2recipe),
-            indent=2,
-            explicit_start=True,
-        ),
-    )
+    write_file("languages.json", dumps(map_lang2version, indent=2))
+    write_file("versions.json", dumps(version_name2recipe, indent=2))
 
 
 generate_dependency_map(all_images)
