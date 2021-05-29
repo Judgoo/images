@@ -56,25 +56,54 @@ podman login docker.io
 
 每个 Version 就是同一个 Language 的不同版本，比如说 JavaScript 有 Nodejs14, Nodejs16, QuickJS 等。
 
-每种 Recipe 就是指某种运行代码的方式，是一个字典，例子如下。
+每种 Recipe 就是指某种运行代码的方式，类声明和例子如下。
 
 ```python
-nasm_recipe = {
-    "id": "nasm",
-    "name": "NASM 2.15.05",
-    "build": [
+
+class Recipe:
+    build: List[str]
+    run: str
+
+
+class NASM(Recipe):
+    build = [
         "nasm -f elf64 -o a.o {filename}",
         "ld -o {output} a.o",
-    ],
-    "run": "./{output}",
-}
-
-bash_recipe = {
-    "id": "bash",
-    "name": "Bash(5.1.0)",
-    "build": [],
-    "run": "bash {filename}",
-}
+    ]
+    run = "./{output}"
 ```
 
-每个 Recipe 有全局唯一的 ID 值，与 Version 是组合的关系。比如说 Nodejs14 和 Nodejs16 都共享一个叫 id 为 `nodejs` 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。
+每个 Version 有全局唯一的 ID 值，与 Recipe 是组合的关系。
+
+
+来个例子：
+JavaScript 语言有三种 Version：Nodejs14、Nodejs16 和 QuickJS。 Version 内容如下：
+
+```python
+nodejs14._version = {
+    "id": "nodejs14",
+    "name": "Node.js 14.16.1",
+    "recipe": recipes.Nodejs,
+}
+nodejs16._version = {
+    "id": "nodejs14",
+    "name": "Node.js 16.2.0",
+    "recipe": recipes.Nodejs,
+}
+qjs._version = {
+    "id": "quickjs-2021-03-27",
+    "name": "QuickJS 2021-03-27",
+    "recipe": recipes.QJS,
+}
+```
+都共享一个叫 Nodejs 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。
+
+```python
+class QJS(Recipe):
+    build = []
+    run = "qjs {filename}"
+
+class Nodejs(Recipe):
+    build = []
+    run = "node {filename}"
+```
