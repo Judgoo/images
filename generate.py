@@ -1,6 +1,6 @@
 import os
 from collections import defaultdict
-from os import listdir, makedirs, remove
+from os import listdir, makedirs, path, remove
 from os.path import isfile, join
 from typing import Any, DefaultDict, Dict, List
 
@@ -19,6 +19,7 @@ for k, v in _s.items():
     all_images.extend(v.ALL_IMAGES)
 
 makedirs("./images", exist_ok=True)
+makedirs("./profiles", exist_ok=True)
 
 for f in listdir("./images"):
     p = join("./images", f)
@@ -79,7 +80,7 @@ def save_yml(filename, dict_):
         indent=2,
         explicit_start=True,
     )
-    with open(filename, "w") as f:
+    with open(path.join("./profiles", filename), "w") as f:
         f.write(content)
 
 
@@ -88,7 +89,6 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
     version_name2recipe: Dict[str, Dict[str, Any]] = dict()
 
     for image in all_images:
-        print(image._image_name)
         version = image._version_name
         langs = image._lang if isinstance(image._lang, list) else [image._lang]
         versions = (
