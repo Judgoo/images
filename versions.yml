@@ -1,6 +1,6 @@
 ---
 bash:
-- build: []
+  build: []
   ext: bash
   filename: main.bash
   filestem: main
@@ -10,7 +10,7 @@ bash:
   output: a.out
   run: bash main.bash
 csharp:
-- build:
+  build:
   - mcs -out:a.exe main.cs
   ext: cs
   filename: main.cs
@@ -21,7 +21,7 @@ csharp:
   output: a.exe
   run: mono a.exe
 dlang2:
-- build:
+  build:
   - dmd -of=a.out main.d
   ext: d
   filename: main.d
@@ -32,7 +32,7 @@ dlang2:
   output: a.out
   run: ./a.out
 esbuild:
-- build:
+  build:
   - esbuild main.ts --outfile=a.js --platform=node --target=node14
   ext: ts
   filename: main.ts
@@ -43,7 +43,7 @@ esbuild:
   output: a.js
   run: node a.js
 gcc:
-- build:
+  build:
   - gcc -lm -w -O3 -std=gnu17 main.c -o a.out
   ext: c
   filename: main.c
@@ -54,7 +54,7 @@ gcc:
   output: a.out
   run: ./a.out
 golang1.16:
-- build:
+  build:
   - go build -o a.out main.go
   ext: go
   filename: main.go
@@ -65,7 +65,7 @@ golang1.16:
   output: a.out
   run: ./a.out
 gpp:
-- build:
+  build:
   - g++ -lm -w -O3 -std=gnu++17 main.cpp -o a.out
   ext: cpp
   filename: main.cpp
@@ -76,7 +76,7 @@ gpp:
   output: a.out
   run: ./a.out
 haskell:
-- build: []
+  build: []
   ext: hs
   filename: main.hs
   filestem: main
@@ -86,7 +86,7 @@ haskell:
   output: a.out
   run: runghc main.hs
 julia1.6:
-- build: []
+  build: []
   ext: jl
   filename: main.jl
   filestem: main
@@ -96,7 +96,7 @@ julia1.6:
   output: a.out
   run: julia main.jl
 kotlin1.4:
-- build:
+  build:
   - kotlinc Main.kt
   ext: kt
   filename: Main.kt
@@ -107,7 +107,7 @@ kotlin1.4:
   output: a.out
   run: kotlin MainKt
 lua:
-- build: []
+  build: []
   ext: lua
   filename: main.lua
   filestem: main
@@ -117,7 +117,7 @@ lua:
   output: a.out
   run: lua main.lua
 nasm:
-- build:
+  build:
   - nasm -f elf64 -o a.o main.asm
   - ld -o a.out a.o
   ext: asm
@@ -129,7 +129,7 @@ nasm:
   output: a.out
   run: ./a.out
 nodejs14:
-- build: []
+  build: []
   ext: js
   filename: main.js
   filestem: main
@@ -139,7 +139,7 @@ nodejs14:
   output: a.out
   run: node main.js
 ocaml:
-- build:
+  build:
   - ocamlc -o a.out main.ml
   ext: ml
   filename: main.ml
@@ -150,7 +150,7 @@ ocaml:
   output: a.out
   run: ./a.out
 openjdk11:
-- build:
+  build:
   - javac Main.java
   ext: java
   filename: Main.java
@@ -161,7 +161,7 @@ openjdk11:
   output: a.out
   run: java Main
 openjdk8:
-- build:
+  build:
   - javac Main.java
   ext: java
   filename: Main.java
@@ -172,7 +172,7 @@ openjdk8:
   output: a.out
   run: java Main
 perl:
-- build: []
+  build: []
   ext: pl
   filename: main.pl
   filestem: main
@@ -182,7 +182,7 @@ perl:
   output: a.out
   run: perl main.pl
 php7:
-- build: []
+  build: []
   ext: php
   filename: main.php
   filestem: main
@@ -192,7 +192,7 @@ php7:
   output: a.out
   run: php main.php
 py27:
-- build: []
+  build: []
   ext: py
   filename: main.py
   filestem: main
@@ -202,7 +202,7 @@ py27:
   output: a.out
   run: python main.py
 py39:
-- build: []
+  build: []
   ext: py
   filename: main.py
   filestem: main
@@ -212,7 +212,7 @@ py39:
   output: a.out
   run: python main.py
 quickjs-2021-03-27:
-- build: []
+  build: []
   ext: js
   filename: main.js
   filestem: main
@@ -222,7 +222,7 @@ quickjs-2021-03-27:
   output: a.out
   run: qjs main.js
 ruby:
-- build: []
+  build: []
   ext: rb
   filename: main.rb
   filestem: main
@@ -232,7 +232,7 @@ ruby:
   output: a.out
   run: ruby main.rb
 rust1.51:
-- build:
+  build:
   - rustc -o a.out main.rs
   ext: rs
   filename: main.rs
@@ -243,7 +243,7 @@ rust1.51:
   output: a.out
   run: ./a.out
 scala2.13:
-- build:
+  build:
   - scalac main.scala
   ext: scala
   filename: main.scala
@@ -254,7 +254,7 @@ scala2.13:
   output: Main
   run: scala Main
 swift:
-- build:
+  build:
   - swiftc -o a.out main.swift
   ext: swift
   filename: main.swift

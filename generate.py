@@ -11,11 +11,6 @@ from src.image_wrapper import ImageWrapper
 from src.versions import *  # noqa: F401
 
 
-def write_file(filename, content):
-    with open(filename, "w") as f:
-        f.write(content)
-
-
 _s = {k: v for k, v in globals().items() if hasattr(v, "ALL_IMAGES")}
 
 all_images: List[ImageWrapper] = []
@@ -78,9 +73,20 @@ gen("docker")
 gen("podman")
 
 
+def save_yml(filename, dict_):
+    content = dump(
+        dict(dict_),
+        indent=2,
+        explicit_start=True,
+    )
+    with open(filename, "w") as f:
+        f.write(content)
+
+
 def generate_dependency_map(all_images: List[ImageWrapper]):
     map_lang2version: DefaultDict[str, List[str]] = defaultdict(list)
     version_name2recipe: Dict[str, Dict[str, Any]] = dict()
+
     for image in all_images:
         print(image._image_name)
         version = image._version_name
@@ -104,15 +110,8 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
             map_lang2version[lang.__name__].append(version["id"])
             version_name2recipe[version["id"]] = _result
 
-    write_file("languages.yml", dump(dict(map_lang2version)))
-    write_file(
-        "versions.yml",
-        dump(
-            dict(version_name2recipe),
-            indent=2,
-            explicit_start=True,
-        ),
-    )
+    save_yml("languages.yml", map_lang2version)
+    save_yml("versions.yml", version_name2recipe)
 
 
 generate_dependency_map(all_images)
