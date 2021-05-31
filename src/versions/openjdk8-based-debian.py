@@ -23,11 +23,11 @@ scala.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wge
     rm -rf "/tmp/"*
 """
 
-scala._lang = languages.Scala
 scala._version = {
     "id": "scala2.13",
     "name": "Scala 2.13.5",
     "recipe": recipes.Scalac,
+    "language": languages.Scala,
 }
 
 KOTLIN_VERSION = "1.4.32"
@@ -49,17 +49,18 @@ kt.RUN = f"""apt-get update && apt-get install -y --no-install-recommends wget u
 
 kt.ENV = "PATH $PATH:/usr/lib/kotlinc/bin"
 
-kt._lang = [languages.Kotlin, languages.Java]
 kt._version = [
     {
         "id": "kotlin1.4",
         "name": "Kotlin 1.4.32",
         "recipe": recipes.Kotlinc,
+        "language": languages.Kotlin,
     },
     {
         "id": "openjdk8",
         "name": "OpenJDK 1.8.0",
         "recipe": recipes.Javac,
+        "language": languages.Java,
     },
 ]
 

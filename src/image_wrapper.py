@@ -1,14 +1,15 @@
-from src.recipes import Recipe
 from typing import List, Type, TypedDict, Union, TYPE_CHECKING
 from .helper import docker
 from .constants import JUDGOO_VERSION
 
 if TYPE_CHECKING:
     from src.languages import Language
+    from src.recipes import Recipe
 
 
 class Version(TypedDict):
-    recipe: Type[Recipe]
+    recipe: Type["Recipe"]
+    language: Type["Language"]
     id: str
     name: str
 
@@ -18,7 +19,6 @@ class ImageWrapper(docker.DockerFile):
     OS: str
     _is_add_judger: bool
 
-    _lang: Union[Type["Language"], List[Type["Language"]]]
     _version: Union[Version, List[Version]]
 
     def __init__(self, name: str, base_img=None, **kwargs):

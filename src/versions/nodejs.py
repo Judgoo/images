@@ -6,11 +6,11 @@ BASE_IMAGE = "node:14-alpine3.13"
 nodejs = AlpineImageWrapper("nodejs14", base_img=BASE_IMAGE)
 nodejs.add_judger()
 
-nodejs._lang = languages.JavaScript
 nodejs._version = {
     "id": "nodejs14",
     "name": "Node.js 14.16.1",
     "recipe": recipes.Nodejs,
+    "language": languages.JavaScript,
 }
 
 esbuild = AlpineImageWrapper(
@@ -18,11 +18,11 @@ esbuild = AlpineImageWrapper(
 )
 esbuild.RUN = "YARN_CACHE_FOLDER=/dev/shm/yarn_cache yarn global add esbuild"
 esbuild.add_judger()
-esbuild._lang = languages.TypeScript
 esbuild._version = {
     "id": "esbuild",
     "name": "esbuild 0.11.14",
     "recipe": recipes.EsBuild,
+    "language": languages.TypeScript,
 }
 
 

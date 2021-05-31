@@ -6,17 +6,18 @@ d.add_packages("g++")
 d.add_judger()
 
 
-d._lang = [languages.C, languages.Cpp]
 d._version = [
     {
         "id": "gcc",
         "name": "GCC 8.3.0",
         "recipe": recipes.GCC,
+        "language": languages.C,
     },
     {
         "id": "gpp",
         "name": "G++ 8.3.0",
         "recipe": recipes.GPP,
+        "language": languages.Cpp,
     },
 ]
 

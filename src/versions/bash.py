@@ -5,11 +5,11 @@ d = AlpineImageWrapper("bash")
 d.add_packages("bash")
 d.add_judger()
 
-d._lang = languages.Bash
 d._version = {
     "id": "bash",
     "name": "Bash(5.1.0)",
     "recipe": recipes.Bash,
+    "language": languages.Bash,
 }
 
 ALL_IMAGES = [d]

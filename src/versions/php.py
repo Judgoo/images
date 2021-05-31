@@ -5,11 +5,11 @@ d = AlpineImageWrapper("php7")
 d.add_packages("php")
 d.add_judger()
 
-d._lang = languages.PHP
 d._version = {
     "id": "php7",
     "name": "PHP 7.4.15",
     "recipe": recipes.PHP,
+    "language": languages.PHP,
 }
 
 

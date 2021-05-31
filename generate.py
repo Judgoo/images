@@ -90,24 +90,21 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
 
     for image in all_images:
         version = image._version_name
-        langs = image._lang if isinstance(image._lang, list) else [image._lang]
         versions = (
             image._version if isinstance(image._version, list) else [image._version]
         )
 
-        if len(langs) != len(versions):
-            print(f"{image._image_name} langs and versions length not equal")
-            return
-        for lang, version in zip(langs, versions):
+        for version in versions:
             recipe = version["recipe"]
+            lang_info = version["language"].to_dict()
             _result: Dict[str, Any] = {
-                "build": [i.format_map(lang.to_dict()) for i in recipe.build],
-                "run": recipe.run.format_map(lang.to_dict()),
+                "build": [i.format_map(lang_info) for i in recipe.build],
+                "run": recipe.run.format_map(lang_info),
                 "name": version["name"],
                 "image": image.get_img_name(),
-                **lang.to_dict(),
+                **lang_info,
             }
-            map_lang2version[lang.__name__].append(version["id"])
+            map_lang2version[version["language"].__name__].append(version["id"])
             version_name2recipe[version["id"]] = _result
 
     save_yml("languages.yml", map_lang2version)

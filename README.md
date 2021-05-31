@@ -32,12 +32,14 @@ docker run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/
 
 ```sh
 docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs docker rmi --force
+podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
 ```
 
 清空 `<none>` 容器：
 
 ```bash
 docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs docker rmi
+podman images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs podman rmi
 ```
 
 ## 推送镜像到 Docker Hub
@@ -84,19 +86,22 @@ nodejs14._version = {
     "id": "nodejs14",
     "name": "Node.js 14.16.1",
     "recipe": recipes.Nodejs,
+    "language": languages.JavaScript,
 }
 nodejs16._version = {
     "id": "nodejs14",
     "name": "Node.js 16.2.0",
     "recipe": recipes.Nodejs,
+    "language": languages.JavaScript,
 }
 qjs._version = {
     "id": "quickjs-2021-03-27",
     "name": "QuickJS 2021-03-27",
     "recipe": recipes.QJS,
+    "language": languages.JavaScript,
 }
 ```
-都共享一个叫 Nodejs 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。
+Nodejs14、Nodejs16 都共享一个叫 Nodejs 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。
 
 ```python
 class QJS(Recipe):

@@ -5,11 +5,11 @@ d = AlpineImageWrapper("ruby")
 d.add_packages("ruby")
 d.add_judger()
 
-d._lang = languages.Ruby
 d._version = {
     "id": "ruby",
     "name": "Ruby 2.7.3",
     "recipe": recipes.Ruby,
+    "language": languages.Ruby,
 }
 
 

@@ -20,11 +20,11 @@ qjs.COPY = "--from=build /out /usr/local/bin/"
 qjs.add_judger()
 
 
-qjs._lang = languages.JavaScript
 qjs._version = {
     "id": "quickjs-2021-03-27",
     "name": "QuickJS 2021-03-27",
     "recipe": recipes.QJS,
+    "language": languages.JavaScript,
 }
 
 

@@ -6,11 +6,11 @@ d.add_packages("dmd", "gcc", "musl-dev")
 d.add_judger()
 
 
-d._lang = languages.D
 d._version = {
     "id": "dlang2",
     "name": "DMD v2.095.0",
     "recipe": recipes.DLang,
+    "language": languages.D,
 }
 
 

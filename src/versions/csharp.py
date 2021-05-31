@@ -11,11 +11,11 @@ apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/t
 """.strip()
 d.add_judger()
 
-d._lang = languages.CSharp
 d._version = {
     "id": "csharp",
     "name": "Mono 6.12.0.122",
     "recipe": recipes.CSharp,
+    "language": languages.CSharp,
 }
 
 
