@@ -10,7 +10,7 @@ from src.constants import JUDGOO_VERSION
 from src.image_wrapper import ImageWrapper
 from src.versions import *  # noqa: F401
 
-
+# 所有的镜像配置
 _s = {k: v for k, v in globals().items() if hasattr(v, "ALL_IMAGES")}
 
 all_images: List[ImageWrapper] = []
@@ -71,10 +71,6 @@ def gen(build_tool):
     os.chmod(build_all, 0o0777)
 
 
-gen("docker")
-gen("podman")
-
-
 def save_yml(filename, dict_):
     content = dump(
         dict(dict_),
@@ -85,12 +81,11 @@ def save_yml(filename, dict_):
         f.write(content)
 
 
-def generate_dependency_map(all_images: List[ImageWrapper]):
+def generate_dependency_map():
     map_lang2version: DefaultDict[str, List[str]] = defaultdict(list)
     version_name2recipe: Dict[str, Dict[str, Any]] = dict()
 
     for image in all_images:
-        version = image._version_name
         versions = (
             image._version if isinstance(image._version, list) else [image._version]
         )
@@ -98,18 +93,19 @@ def generate_dependency_map(all_images: List[ImageWrapper]):
         for version in versions:
             recipe = version["recipe"]
             lang_info = version["language"].to_dict()
-            _result: Dict[str, Any] = {
-                "build": [i.format_map(lang_info) for i in recipe.build],
+
+            map_lang2version[version["language"].__name__].append(version["id"])
+            version_name2recipe[version["id"]] = {
+                "build": [b.format_map(lang_info) for b in recipe.build],
                 "run": recipe.run.format_map(lang_info),
                 "name": version["name"],
                 "image": image.get_img_name(),
                 **lang_info,
             }
-            map_lang2version[version["language"].__name__].append(version["id"])
-            version_name2recipe[version["id"]] = _result
 
     save_yml("languages.yml", map_lang2version)
     save_yml("versions.yml", version_name2recipe)
 
 
-generate_dependency_map(all_images)
+generate_dependency_map()
+gen("docker")

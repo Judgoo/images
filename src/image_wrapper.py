@@ -1,17 +1,16 @@
-from typing import List, Type, TypedDict, Union, TYPE_CHECKING
-from .helper import docker
-from .constants import JUDGOO_VERSION
+from typing import List, Type, TypedDict, Union
 
-if TYPE_CHECKING:
-    from src.languages import Language
-    from src.recipes import Recipe
+from .constants import JUDGOO_VERSION
+from .helper import docker
+from .languages import Language
+from .recipes import Recipe
 
 
 class Version(TypedDict):
-    recipe: Type["Recipe"]
-    language: Type["Language"]
     id: str
     name: str
+    recipe: Type["Recipe"]
+    language: Type["Language"]
 
 
 class ImageWrapper(docker.DockerFile):
