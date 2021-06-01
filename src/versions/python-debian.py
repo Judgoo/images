@@ -1,6 +1,5 @@
-from src import recipes, languages
+from src import languages, recipes
 from src.image_wrapper import DebianImageWrapper
-
 
 py27 = DebianImageWrapper("python2.7", base_img="python:2.7.18-slim-buster")
 py27.RUN = "pip install --no-cache numpy pandas"

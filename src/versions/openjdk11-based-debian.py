@@ -1,4 +1,4 @@
-from src import recipes, languages
+from src import languages, recipes
 from src.image_wrapper import DebianImageWrapper
 
 d = DebianImageWrapper("openjdk11", "adoptopenjdk/openjdk11:debianslim-slim")

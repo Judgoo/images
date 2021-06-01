@@ -1,4 +1,4 @@
-from src import recipes, languages
+from src import languages, recipes
 from src.image_wrapper import DebianImageWrapper
 
 d = DebianImageWrapper("swift5.3.3", "swift:5.3.3-focal")

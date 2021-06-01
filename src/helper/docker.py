@@ -14,13 +14,12 @@ limitations under the License.
 code is original from <https://github.com/jen-soft/pydocker>
 """
 
-import os
-import sys
-import re
 import json
-import subprocess
-
 import logging
+import os
+import re
+import subprocess
+import sys
 from typing import Any, List, TypedDict, Union
 
 log = logging.getLogger(__name__)

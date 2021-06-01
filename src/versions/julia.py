@@ -1,4 +1,4 @@
-from src import recipes, languages
+from src import languages, recipes
 from src.image_wrapper import AlpineImageWrapper
 
 BASE_IMAGE = "julia:1.6.0-alpine3.13"

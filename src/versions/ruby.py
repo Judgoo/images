@@ -1,4 +1,4 @@
-from src import recipes, languages
+from src import languages, recipes
 from src.image_wrapper import AlpineImageWrapper
 
 d = AlpineImageWrapper("ruby")
