@@ -14,9 +14,9 @@ qjs_builder.RUN = """ cd /tmp \
 """
 
 qjs = AlpineImageWrapper("quickjs-2021-03-27")
-qjs.add_builder(qjs_builder, "build")
+qjs.add_builder("judgoo/vendor-quickjs:v0.0.1", "qjs_builder")
 
-qjs.COPY = "--from=build /out /usr/local/bin/"
+qjs.COPY = "--from=qjs_builder /out /usr/local/bin/"
 qjs.add_judger()
 
 

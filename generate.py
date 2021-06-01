@@ -62,6 +62,7 @@ def gen(build_tool):
             [
                 f"{build_tool} build -t judgoo/base-alpine:{JUDGOO_VERSION} -f ./base/Dockerfile.alpine.base ./base\n",
                 f"{build_tool} build -t judgoo/base-debian:{JUDGOO_VERSION} -f ./base/Dockerfile.debian.base ./base\n",
+                f"{build_tool} build -t judgoo/vendor-quickjs:v0.0.1 -f ./vendor/Dockerfile.quickjs ./vendor\n",
                 "\n",
                 f"sh {build_sh}\n",
             ]

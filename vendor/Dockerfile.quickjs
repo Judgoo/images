@@ -1,0 +1,9 @@
+FROM alpine:3.13
+
+ENV VERSION=2021-03-27
+
+RUN apk add --no-cache xz make g++
+ADD https://bellard.org/quickjs/quickjs-${VERSION}.tar.xz /tmp
+
+RUN cd /tmp && tar xf quickjs-${VERSION}.tar.xz && cd quickjs-${VERSION} && (make || true) && mkdir /out && mv qjs qjsc qjscalc /out
+VOLUME /out

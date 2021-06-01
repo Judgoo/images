@@ -21,7 +21,7 @@ import json
 import subprocess
 
 import logging
-from typing import Any, List, TypedDict
+from typing import Any, List, TypedDict, Union
 
 log = logging.getLogger(__name__)
 
@@ -239,11 +239,14 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
             for file in files:
                 os.remove(file)
 
-    def add_front_from(self, from_):
+    def add_front_from(self, from_: str):
         self.FROM = from_
         x = self._instructions.pop()
         self._instructions.insert(0, x)
 
-    def add_builder(self, Builder: "DockerFile", builder_name):
-        Builder._instructions[0]["value"] += f" as {builder_name}"
-        self._instructions = Builder._instructions + self._instructions
+    def add_builder(self, Builder: Union["DockerFile", str], builder_name: str):
+        if isinstance(Builder, str):
+            self.add_front_from(f"{Builder} as {builder_name}")
+        else:
+            Builder._instructions[0]["value"] += f" as {builder_name}"
+            self._instructions = Builder._instructions + self._instructions
