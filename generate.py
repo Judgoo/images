@@ -54,9 +54,6 @@ def gen(build_tool):
         f.write(f"{build_tool} push judgoo/base-debian:{JUDGOO_VERSION}\n")
     os.chmod(push_all, 0o0777)
 
-    if build_tool == "docker":
-        build_tool = "sudo docker"
-
     with open(build_all, "w+") as f:
         f.writelines(
             [

@@ -211,10 +211,8 @@ trap '_failure ${LINENO} "$BASH_COMMAND"' ERR
     ):
         if files is None:
             files = self.generate_files(dry_run=True)
-        dirname, filename = os.path.split(files[0])
+        dirname, _ = os.path.split(files[0])
         build_args = self._build_args.strip() + " " + build_args.strip()
-        if build_tool == "docker":
-            build_tool = "sudo docker"
         cmd = f'{build_tool} build {build_args}  --tag {self.get_img_name()}  --file={files[0]} "{dirname}/" {trailing_args}'
         cmd = re.sub(r"[\r\n\s\t]+", " ", cmd).strip()
         return cmd

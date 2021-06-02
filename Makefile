@@ -1,8 +1,8 @@
 gen:
 	python3 generate.py
 clean_docker:
-	sudo docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs sudo docker rmi
-	sudo docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs sudo docker rmi --force
+	docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs docker rmi
+	docker images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs docker rmi --force
 clean_podman:
 	podman images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs podman rmi
 	podman images --no-trunc | grep 'judgoo' | awk '{ print $3 }' | xargs podman rmi --force
