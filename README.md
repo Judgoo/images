@@ -15,9 +15,9 @@
 使用 gcc 容器的例子：
 
 ```sh
-docker run --rm -v $(pwd)/testdata:/workspace judgoo/gpp:v0.0.1 -d ./c
+docker run --privileged --rm -v $(pwd)/testdata:/workspace judgoo/gpp:v0.0.2 -d ./c
 # interactive
-docker run --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/gpp:v0.0.1
+docker run --privileged --rm -v $(pwd)/testdata:/workspace -it --entrypoint /bin/bash judgoo/gpp:v0.0.2
 ```
 
 在容器内部可以打开 c，cpp 这些文件夹，执行 `Judger`， `runner xxx` 等命令试一下。
@@ -61,7 +61,6 @@ podman login docker.io
 每种 Recipe 就是指某种运行代码的方式，类声明和例子如下。
 
 ```python
-
 class Recipe:
     build: List[str]
     run: str
@@ -101,12 +100,14 @@ qjs._version = {
     "language": languages.JavaScript,
 }
 ```
+
 Nodejs14、Nodejs16 都共享一个叫 Nodejs 的 Recipe，而同为 Nodejs 语言的 QuickJS 却会使用 qjs 这个 Recipe。
 
 ```python
 class QJS(Recipe):
     build = []
     run = "qjs {filename}"
+
 
 class Nodejs(Recipe):
     build = []
